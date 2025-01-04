@@ -8,7 +8,6 @@ public class Prezenter {
 	public static void main(String[] args) {
 		IMenuView menuRecepcjonistki = new RecepcjonistkaMenuView();
 		menuRecepcjonistki.wyswietl();
-
 	}
 
 

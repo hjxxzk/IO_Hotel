@@ -1,6 +1,7 @@
 package ViewHotelu;
 
 import PrezenterHotelu.Logowanie;
+import PrezenterHotelu.RecepcjonistkaSingleton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,7 +72,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				if (logowanie.checkCredentials(username, password)) {
 					JOptionPane.showMessageDialog(frame, "Logowanie udane!");
 					frame.dispose();
-					RecepcjonistkaMenuView();
+					wyswietlMenuPoZalogowaniu();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Błędny login lub hasło.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
@@ -83,8 +84,121 @@ public class RecepcjonistkaMenuView implements IMenuView {
 
 	}
 
+	@Override
 	public void RecepcjonistkaMenuView() {
-		// TODO - implement RecepcjonistkaMenuView.RecepcjonistkaMenuView
+
 	}
+
+	public void wyswietlMenuPoZalogowaniu() {
+		// Główne okno
+		JFrame frame = new JFrame(logowanie.getObecnieZalogowanaRecepcjonistka().getId() + " " +logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + " " + logowanie.getObecnieZalogowanaRecepcjonistka().getNazwisko());
+		frame.setSize(800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Główny panel
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(255, 182, 156)); // Pomarańczowe tło
+
+		// Nagłówek
+		JLabel greetingLabel = new JLabel("Miłego dnia " + logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + "!");
+		greetingLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		greetingLabel.setBounds(20, 10, 300, 30);
+		panel.add(greetingLabel);
+
+		// Przycisk "Wyloguj"
+		JButton logoutButton = new JButton("Wyloguj");
+		logoutButton.setBounds(700, 10, 80, 30);
+		panel.add(logoutButton);
+
+		// Sekcja "Lista rezerwacji"
+		JLabel reservationLabel = new JLabel("Lista rezerwacji:");
+		reservationLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		reservationLabel.setBounds(20, 60, 200, 20);
+		panel.add(reservationLabel);
+
+		JList<String> reservationList = new JList<>(new String[]{}); // TODO Pusta lista
+		JScrollPane reservationScrollPane = new JScrollPane(reservationList);
+		reservationScrollPane.setBounds(20, 90, 495, 300);
+		panel.add(reservationScrollPane);
+
+		// Sekcja "Nasi dzisiejsi goście"
+		JLabel guestsLabel = new JLabel("Nasi dzisiejsi goście:");
+		guestsLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		guestsLabel.setBounds(550, 60, 200, 20);
+		panel.add(guestsLabel);
+
+		JList<String> guestList = new JList<>(new String[]{}); // TODO Pusta lista
+		JScrollPane guestScrollPane = new JScrollPane(guestList);
+		guestScrollPane.setBounds(555, 90, 200, 300);
+		panel.add(guestScrollPane);
+
+		// Przyciski
+		JButton addButton = new JButton("Dodaj");
+		addButton.setBounds(15, 400, 100, 30);
+		panel.add(addButton);
+
+		JButton editButton = new JButton("Edytuj");
+		editButton.setBounds(150, 400, 100, 30);
+		panel.add(editButton);
+
+		JButton deleteButton = new JButton("Usuń");
+		deleteButton.setBounds(285, 400, 100, 30);
+		panel.add(deleteButton);
+
+		JButton expandButton = new JButton("Rozwiń");
+		expandButton.setBounds(420, 400, 100, 30);
+		panel.add(expandButton);
+
+		JButton checkInButton = new JButton("Zamelduj");
+		checkInButton.setBounds(545, 400, 100, 30);
+		panel.add(checkInButton);
+
+		JButton checkOutButton = new JButton("Wymelduj");
+		checkOutButton.setBounds(660, 400, 100, 30);
+		panel.add(checkOutButton);
+
+		// Akcja przycisku "Wyloguj"
+		logoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pokazOkienkoWylogowania(logowanie.getObecnieZalogowanaRecepcjonistka().getImie());
+				//JOptionPane.showMessageDialog(frame, "Wylogowano!");
+				frame.dispose();
+			}
+		});
+
+		// Dodanie panelu do ramki i wyświetlenie
+		frame.add(panel);
+		frame.setVisible(true);
+	}
+
+	public void pokazOkienkoWylogowania(String imieRecepcjonistki) {
+		// Tworzenie nowego okna
+		JFrame logoutFrame = new JFrame("Do widzenia!");
+		logoutFrame.setSize(400, 200);
+		logoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Panel
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(255, 182, 156)); // Pomarańczowe tło
+
+		// Wiadomość wylogowania
+		JLabel messageLabel1 = new JLabel("Poprawnie wylogowano [" + imieRecepcjonistki + "]");
+		messageLabel1.setFont(new Font("Arial", Font.BOLD, 14));
+		messageLabel1.setBounds(80, 50, 300, 30);
+		panel.add(messageLabel1);
+
+		JLabel messageLabel2 = new JLabel("Dziękujemy za Twoją pracę!");
+		messageLabel2.setFont(new Font("Arial", Font.PLAIN, 14));
+		messageLabel2.setBounds(100, 90, 200, 30);
+		panel.add(messageLabel2);
+
+		// Dodanie panelu do ramki i wyświetlenie
+		logoutFrame.add(panel);
+		logoutFrame.setVisible(true);
+	}
+
 
 }
