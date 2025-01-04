@@ -1,6 +1,8 @@
 package PrezenterHotelu;
 
-public class RececjonistkaSingleton {
+import ViewHotelu.IMenuView;
+
+public class RececjonistkaSingleton{
 
 	private IMenuView menuView;
 
@@ -8,5 +10,4 @@ public class RececjonistkaSingleton {
 		// TODO - implement RececjonistkaSingleton.start
 		throw new UnsupportedOperationException();
 	}
-
 }

@@ -1,3 +1,11 @@
+package InterfejsHotelu;
+
+import ModelHotelu.Gosc;
+import ModelHotelu.Platnosc;
+import ModelHotelu.Pokoj;
+
+import java.time.LocalDate;
+
 public interface IHotel {
 
 	/**
@@ -50,7 +58,7 @@ public interface IHotel {
 	 * @param username
 	 * @param password
 	 */
-	void logIn(string username, string password);
+	void logIn(String username, String password);
 
 	void logOut();
 

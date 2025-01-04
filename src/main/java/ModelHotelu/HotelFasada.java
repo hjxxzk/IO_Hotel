@@ -1,20 +1,26 @@
-package PrezenterHotelu;
+package ModelHotelu;
+
+import InterfejsHotelu.IHotel;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 
 public class HotelFasada implements IHotel {
 
-	private list<Pokój> pokoje;
-	private list<Rezerwacja> rezerwacja;
-	private HashMap<string, string> Recepcjonistki;
+	private List<Pokoj> pokoje;
+	private List<Rezerwacja> rezerwacja;
+	private HashMap<String, String> Recepcjonistki;
 
-	public list<Pokój> getPokoje() {
+	public List<Pokoj> getPokoje() {
 		return this.pokoje;
 	}
 
-	public list<Rezerwacja> getRezerwacja() {
+	public List<Rezerwacja> getRezerwacja() {
 		return this.rezerwacja;
 	}
 
-	public HashMap<string, string> getRecepcjonistki() {
+	public HashMap<String, String> getRecepcjonistki() {
 		return this.Recepcjonistki;
 	}
 
@@ -28,7 +34,7 @@ public class HotelFasada implements IHotel {
 	 * @param pokoj
 	 * @param Termin
 	 */
-	private void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin) {
+	public void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin) {
 		// TODO - implement HotelFasada.makeReservation
 		throw new UnsupportedOperationException();
 	}
@@ -44,7 +50,7 @@ public class HotelFasada implements IHotel {
 	 * @param Termin
 	 * @param numer_rezerwacji
 	 */
-	private void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin, int numer_rezerwacji) {
+	public void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin, int numer_rezerwacji) {
 		// TODO - implement HotelFasada.editReservation
 		throw new UnsupportedOperationException();
 	}
@@ -53,12 +59,12 @@ public class HotelFasada implements IHotel {
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	private void deleteReservation(int numer_rezerwacji) {
+	public void deleteReservation(int numer_rezerwacji) {
 		// TODO - implement HotelFasada.deleteReservation
 		throw new UnsupportedOperationException();
 	}
 
-	protected void displayTodaysGuests() {
+	public void displayTodaysGuests() {
 		// TODO - implement HotelFasada.displayTodaysGuests
 		throw new UnsupportedOperationException();
 	}
@@ -67,7 +73,7 @@ public class HotelFasada implements IHotel {
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	protected void checkInGuests(int numer_rezerwacji) {
+	public void checkInGuests(int numer_rezerwacji) {
 		// TODO - implement HotelFasada.checkInGuests
 		throw new UnsupportedOperationException();
 	}
@@ -76,7 +82,7 @@ public class HotelFasada implements IHotel {
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	protected void checkOutGuests(int numer_rezerwacji) {
+	public void checkOutGuests(int numer_rezerwacji) {
 		// TODO - implement HotelFasada.checkOutGuests
 		throw new UnsupportedOperationException();
 	}
@@ -86,17 +92,17 @@ public class HotelFasada implements IHotel {
 	 * @param username
 	 * @param password
 	 */
-	protected void logIn(string username, string password) {
+	public void logIn(String username, String password) {
 		// TODO - implement HotelFasada.logIn
 		throw new UnsupportedOperationException();
 	}
 
-	protected void logOut() {
+	public void logOut() {
 		// TODO - implement HotelFasada.logOut
 		throw new UnsupportedOperationException();
 	}
 
-	private void checkInput() {
+	public void checkInput() {
 		// TODO - implement HotelFasada.checkInput
 		throw new UnsupportedOperationException();
 	}

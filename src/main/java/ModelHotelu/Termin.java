@@ -1,5 +1,7 @@
 package ModelHotelu;
 
+import java.time.LocalDate;
+
 public class Termin {
 
 	private LocalDate data_rozpoczecia_pobytu;

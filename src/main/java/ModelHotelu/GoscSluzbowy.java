@@ -1,54 +1,123 @@
 package ModelHotelu;
 
-public class GoscSluzbowy extends Go��FactoryMethod {
+import java.util.ArrayList;
+import java.util.List;
 
-	private string nazwa_firmy;
-	private int numer_vat;
-	private int numer_nip;
-	private string imie_nazwisko;
-	private string numer_telefonu;
-	private string adres_email;
-	private boolean Czy_dla_kogos;
-	private List<Wspollokatorzy> wspollokatorzy;
-	private string specjalne_zyczenia;
+public class GoscSluzbowy extends Gosc {
 
-	public string getNazwa_firmy() {
-		return this.nazwa_firmy;
+	private String nazwaFirmy;
+	private int numerVat;
+	private int numerNip;
+	private String imieNazwisko;
+	private String numerTelefonu;
+	private String adresEmail;
+	private boolean czyDlaKogos;
+	private List<Wspollokator> wspollokatorzy;
+	private String specjalneZyczenia;
+
+	// Konstruktor
+	public GoscSluzbowy(String nazwaFirmy, int numerVat, int numerNip, String imieNazwisko, String numerTelefonu, String adresEmail, boolean czyDlaKogos, String specjalneZyczenia) {
+		this.nazwaFirmy = nazwaFirmy;
+		this.numerVat = numerVat;
+		this.numerNip = numerNip;
+		this.imieNazwisko = imieNazwisko;
+		this.numerTelefonu = numerTelefonu;
+		this.adresEmail = adresEmail;
+		this.wspollokatorzy = new ArrayList<>();
+		this.czyDlaKogos = czyDlaKogos;
+		this.specjalneZyczenia = specjalneZyczenia;
 	}
 
-	public void setNazwa_firmy(string nazwa_firmy) {
-		this.nazwa_firmy = nazwa_firmy;
+	// Gettery i Settery
+	public String getNazwaFirmy() {
+		return nazwaFirmy;
 	}
 
-	public int getNumer_vat() {
-		return this.numer_vat;
+	public void setNazwaFirmy(String nazwaFirmy) {
+		this.nazwaFirmy = nazwaFirmy;
 	}
 
-	public void setNumer_vat(int numer_vat) {
-		this.numer_vat = numer_vat;
+	public int getNumerVat() {
+		return numerVat;
 	}
 
-	public int getNumer_nip() {
-		return this.numer_nip;
+	public void setNumerVat(int numerVat) {
+		this.numerVat = numerVat;
 	}
 
-	public void setNumer_nip(int numer_nip) {
-		this.numer_nip = numer_nip;
+	public int getNumerNip() {
+		return numerNip;
 	}
 
-	private void addRoommates() {
-		// TODO - implement GoscSluzbowy.addRoommates
-		throw new UnsupportedOperationException();
+	public void setNumerNip(int numerNip) {
+		this.numerNip = numerNip;
 	}
 
-	private void editContactInfo() {
-		// TODO - implement GoscSluzbowy.editContactInfo
-		throw new UnsupportedOperationException();
+	public String getImieNazwisko() {
+		return imieNazwisko;
 	}
 
-	private void deleteRoommate() {
-		// TODO - implement GoscSluzbowy.deleteRoommate
-		throw new UnsupportedOperationException();
+	public void setImieNazwisko(String imieNazwisko) {
+		this.imieNazwisko = imieNazwisko;
 	}
 
+	public String getNumerTelefonu() {
+		return numerTelefonu;
+	}
+
+	public void setNumerTelefonu(String numerTelefonu) {
+		this.numerTelefonu = numerTelefonu;
+	}
+
+	public String getAdresEmail() {
+		return adresEmail;
+	}
+
+	public void setAdresEmail(String adresEmail) {
+		this.adresEmail = adresEmail;
+	}
+
+	public boolean isCzyDlaKogos() {
+		return czyDlaKogos;
+	}
+
+	public void setCzyDlaKogos(boolean czyDlaKogos) {
+		this.czyDlaKogos = czyDlaKogos;
+	}
+
+	public List<Wspollokator> getWspollokatorzy() {
+		return wspollokatorzy;
+	}
+
+	public void setWspollokatorzy(List<Wspollokator> wspollokatorzy) {
+		this.wspollokatorzy = wspollokatorzy;
+	}
+
+	public String getSpecjalneZyczenia() {
+		return specjalneZyczenia;
+	}
+
+	public void setSpecjalneZyczenia(String specjalneZyczenia) {
+		this.specjalneZyczenia = specjalneZyczenia;
+	}
+
+	// Operacje na wspollokatorach
+	public void addRoommates(Wspollokator wspollokator) {
+		wspollokatorzy.add(wspollokator);
+		System.out.println("Dodano współlokatora: " + wspollokator.getImieNazwisko());
+	}
+
+	public void editContactInfo(String nowyNumer, String nowyEmail) {
+		this.numerTelefonu = nowyNumer;
+		this.adresEmail = nowyEmail;
+		System.out.println("Zaktualizowano dane kontaktowe dla: " + imieNazwisko);
+	}
+
+	public void deleteRoommate(Wspollokator wspollokator) {
+		if (wspollokatorzy.remove(wspollokator)) {
+			System.out.println("Usunięto współlokatora: " + wspollokator.getImieNazwisko());
+		} else {
+			System.out.println("Nie znaleziono współlokatora.");
+		}
+	}
 }
