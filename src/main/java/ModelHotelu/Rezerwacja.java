@@ -4,19 +4,21 @@ import InterfejsHotelu.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 public class Rezerwacja implements IRezerwacja {
 
 	private String dataRezerwacji;
 	private boolean zameldowanie;
 	private boolean wymeldowanie;
-	private int numerRezerwacji;
+	private String numerRezerwacji;
 	private int iloscDoroslych;
 	private int iloscDzieci;
-	private Platnosc platnosc; // Corrected to Platnosc (Payment)
+	private Platnosc platnosc;
 	private String godzinaPrzyjazdu;
-	private Gosc gosc; // Corrected to GoscFactoryMethod (Guest Factory)
+	private Gosc gosc;
 	private Pokoj pokoj;
 	private Termin termin;
 
@@ -25,7 +27,7 @@ public class Rezerwacja implements IRezerwacja {
 			@JsonProperty("dataRezerwacji") String dataRezerwacji,
 			@JsonProperty("zameldowanie") boolean zameldowanie,
 			@JsonProperty("wymeldowanie") boolean wymeldowanie,
-			@JsonProperty("numerRezerwacji") int numerRezerwacji,
+			@JsonProperty("numerRezerwacji") String numerRezerwacji,
 			@JsonProperty("iloscDoroslych") int iloscDoroslych,
 			@JsonProperty("iloscDzieci") int iloscDzieci,
 			@JsonProperty("platnosc") Platnosc platnosc,
@@ -44,6 +46,25 @@ public class Rezerwacja implements IRezerwacja {
 		this.gosc = gosc;
 		this.pokoj = pokoj;
 		this.termin = termin;
+	}
+
+	public Rezerwacja(int iloscDoroslych, int iloscDzieci, Platnosc platnosc, String godzinaPrzyjazdu, Gosc gosc, Pokoj pokoj, Termin termin)	{
+		this.dataRezerwacji = getCurrentDate();
+		this.iloscDoroslych = iloscDoroslych;
+		this.iloscDzieci = iloscDzieci;
+		this.platnosc = platnosc;
+		this.godzinaPrzyjazdu = godzinaPrzyjazdu;
+		this.gosc = gosc;
+		this.pokoj = pokoj;
+		this.termin = termin;
+		this.zameldowanie = false;
+		this.wymeldowanie = false;
+		this.numerRezerwacji = generateReservationNumber();
+	}
+
+	public String getCurrentDate()	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(new Date());
 	}
 
 	public String getDataRezerwacji() {
@@ -70,7 +91,7 @@ public class Rezerwacja implements IRezerwacja {
 		this.wymeldowanie = wymeldowanie;
 	}
 
-	public int getNumerRezerwacji() {
+	public String getNumerRezerwacji() {
 		return this.numerRezerwacji;
 	}
 
@@ -122,30 +143,18 @@ public class Rezerwacja implements IRezerwacja {
 		this.termin = termin;
 	}
 
-	public void generateReservationNumber() {
-		// TODO - implement Rezerwacja.generateReservationNumber
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * Adds payment information (e.g., prepayment)
-	 *
-	 * @param formaPlatnosci Payment method
-	 * @param przedplata Prepayment amount
-	 */
-	public void addPaymentInformation(FormaPlatnosci formaPlatnosci, float przedplata) {
-		// TODO - implement Rezerwacja.addPaymentInformation
-		throw new UnsupportedOperationException();
+	public String generateReservationNumber() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(100000);
+		return getCurrentDate() + "-" + String.format("%05d", randomNumber);
 	}
 
 	public void checkIn() {
-		// TODO - implement Rezerwacja.checkIn
-		throw new UnsupportedOperationException();
+		this.zameldowanie = true;
 	}
 
 	public void checkOut() {
-		// TODO - implement Rezerwacja.checkOut
-		throw new UnsupportedOperationException();
+		this.wymeldowanie = true;
 	}
 
 	/**
@@ -156,8 +165,8 @@ public class Rezerwacja implements IRezerwacja {
 	 */
 	@Override
 	public void editTermin(String dataRozpoczecia, String dataZakonczenia) {
-		// TODO - implement Rezerwacja.editTermin
-		throw new UnsupportedOperationException();
+		this.termin.setData_rozpoczecia_pobytu(dataRozpoczecia);
+		this.termin.setData_zakonczenia_pobytu(dataZakonczenia);
 	}
 
 }

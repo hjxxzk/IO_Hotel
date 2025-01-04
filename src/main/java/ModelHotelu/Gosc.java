@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Factory Method
  */
-
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -22,14 +21,22 @@ import java.util.List;
 public abstract class Gosc {
     private AdresZamieszkania adresZamieszkania;
     private String imieNazwisko;
+
     private String numerTelefonu;
     private String adresEmail;
     private boolean czyDlaKogos;
     private List<Wspollokator> wspollokatorzy;
     private String specjalneZyczenia;
-
     public String getImieNazwisko() {
         return this.imieNazwisko;
+    }
+
+    public AdresZamieszkania getAdresZamieszkania() {
+        return adresZamieszkania;
+    }
+
+    public void setAdresZamieszkania(AdresZamieszkania adresZamieszkania) {
+        this.adresZamieszkania = adresZamieszkania;
     }
 
     public void setImieNazwisko(String imieNazwisko) {

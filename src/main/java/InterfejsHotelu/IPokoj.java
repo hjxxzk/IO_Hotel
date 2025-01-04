@@ -1,5 +1,7 @@
 package InterfejsHotelu;
 
+import ModelHotelu.Termin;
+
 import java.time.LocalDate;
 
 public interface IPokoj {
@@ -7,10 +9,9 @@ public interface IPokoj {
     /**
      * Dodaje rezerwację w podanym zakresie dat.
      *
-     * @param dataRozpoczecia Data rozpoczęcia rezerwacji
-     * @param dataZakonczenia Data zakończenia rezerwacji
+     * @param nowyTermin Data rezerwacji
      */
-    void addReservationDate(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
+    void addReservationDate(Termin nowyTermin);
 
     /**
      * Usuwa rezerwację w podanym zakresie dat.
@@ -18,7 +19,7 @@ public interface IPokoj {
      * @param dataRozpoczecia Data rozpoczęcia rezerwacji
      * @param dataZakonczenia Data zakończenia rezerwacji
      */
-    void deleteReservationDate(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
+    void deleteReservationDate(String dataRozpoczecia, String dataZakonczenia);
 
     /**
      * Edytuje istniejącą rezerwację, zmieniając zakres dat.
@@ -28,8 +29,8 @@ public interface IPokoj {
      * @param zmienionaDataRozpoczecia Nowa data rozpoczęcia rezerwacji
      * @param zmienionaDataZakonczenia Nowa data zakończenia rezerwacji
      */
-    void editReservationDate(LocalDate dataRozpoczecia, LocalDate dataZakonczenia,
-                             LocalDate zmienionaDataRozpoczecia, LocalDate zmienionaDataZakonczenia);
+    void editReservationDate(String dataRozpoczecia, String dataZakonczenia,
+                             String zmienionaDataRozpoczecia, String zmienionaDataZakonczenia);
 
     /**
      * Oblicza koszt rezerwacji na podstawie podanego zakresu dat.
@@ -38,5 +39,5 @@ public interface IPokoj {
      * @param dataZakonczenia Data zakończenia rezerwacji
      * @return Koszt rezerwacji
      */
-    float calculateCost(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
+    float calculateCost(String dataRozpoczecia, String dataZakonczenia);
 }

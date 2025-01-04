@@ -1,17 +1,14 @@
 package PrezenterHotelu;
 
-import InterfejsHotelu.IHotel;
 import ModelHotelu.HotelFasada;
 import ModelHotelu.Pokoj;
 import ModelHotelu.Rezerwacja;
-import ModelHotelu.Termin;
 import ViewHotelu.IMenuView;
 import ViewHotelu.RecepcjonistkaMenuView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Prezenter {
@@ -34,7 +31,7 @@ public class Prezenter {
 			List<Rezerwacja> rezerwacje = objectMapper.readValue(rezerwacjePokojeJSON, new TypeReference<List<Rezerwacja>>() {});
 
 			hotel.setPokoje(pokoje);
-			hotel.setRezerwacja(rezerwacje);
+			hotel.setRezerwacje(rezerwacje);
 
 		} catch (IOException e) {
 			e.printStackTrace();

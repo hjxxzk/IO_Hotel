@@ -1,10 +1,9 @@
 package InterfejsHotelu;
 
-import ModelHotelu.Gosc;
-import ModelHotelu.Platnosc;
-import ModelHotelu.Pokoj;
+import ModelHotelu.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IHotel {
 
@@ -16,9 +15,9 @@ public interface IHotel {
 	 * @param godzina_przyjazdu
 	 * @param gosc
 	 * @param pokoj
-	 * @param Termin
+	 * @param termin
 	 */
-	void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin);
+	void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin);
 
 	/**
 	 * 
@@ -37,30 +36,21 @@ public interface IHotel {
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	void deleteReservation(int numer_rezerwacji);
+	void deleteReservation(String numer_rezerwacji);
 
-	void displayTodaysGuests();
-
-	/**
-	 * 
-	 * @param numer_rezerwacji
-	 */
-	void checkInGuests(int numer_rezerwacji);
+	List<Rezerwacja> displayTodaysGuests();
 
 	/**
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	void checkOutGuests(int numer_rezerwacji);
+	void checkInGuests(String numer_rezerwacji);
 
 	/**
 	 * 
-	 * @param username
-	 * @param password
+	 * @param numer_rezerwacji
 	 */
-	void logIn(String username, String password);
-
-	void logOut();
+	void checkOutGuests(String numer_rezerwacji);
 
 	void checkInput();
 

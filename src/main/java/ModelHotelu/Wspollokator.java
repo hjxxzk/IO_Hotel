@@ -33,9 +33,4 @@ public class Wspollokator extends Gosc {
         this.adresEmail = adresEmail;
     }
 
-    // Edytowanie danych kontaktowych
-    public void editRoommatesContactInfo(String nowyEmail) {
-        this.adresEmail = nowyEmail;
-        System.out.println("Zaktualizowano email współlokatora: " + imieNazwisko);
-    }
 }

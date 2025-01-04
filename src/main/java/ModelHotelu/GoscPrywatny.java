@@ -14,6 +14,11 @@ public class GoscPrywatny extends Gosc {
 	private List<Wspollokator> wspollokatorzy;
 	private String specjalneZyczenia;
 
+	@Override
+	public AdresZamieszkania getAdresZamieszkania() {
+		return adresZamieszkania;
+	}
+
 	private AdresZamieszkania adresZamieszkania;
 
 	@JsonCreator
@@ -37,24 +42,17 @@ public class GoscPrywatny extends Gosc {
 		this.adresZamieszkania = adresZamieszkania;
 	}
 
-	private void setAddress() {
-		// TODO - implement GoscPrywatny.setAddress
-		throw new UnsupportedOperationException();
+	private void addRoommates(Wspollokator wspollokator) {
+		wspollokatorzy.add(wspollokator);
 	}
 
-	private void addRoommates() {
-		// TODO - implement GoscPrywatny.addRoommates
-		throw new UnsupportedOperationException();
+	private void editContactInfo(String newNumerTelefonu, String newAdresEmail) {
+		this.numerTelefonu = newNumerTelefonu;
+		this.adresEmail = newAdresEmail;
 	}
 
-	private void editContactInfo() {
-		// TODO - implement GoscPrywatny.editContactInfo
-		throw new UnsupportedOperationException();
-	}
-
-	private void deleteRoommate() {
-		// TODO - implement GoscPrywatny.deleteRoommate
-		throw new UnsupportedOperationException();
+	private void deleteRoommate(Wspollokator wspollokator) {
+		this.wspollokatorzy.remove(wspollokator);
 	}
 
 	public String getImieNazwisko() {

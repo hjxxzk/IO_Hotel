@@ -4,12 +4,14 @@ import InterfejsHotelu.IPlatnosc;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Platnosc implements IPlatnosc {
 
     private float przedplata;
-    private float koszt;
+    private final float koszt;
     private FormaPlatnosci formaPlatnosci;
     private String dataPlatnosci;
     private String dataPrzedplaty;
@@ -36,10 +38,6 @@ public class Platnosc implements IPlatnosc {
 
     public float getKoszt() {
         return this.koszt;
-    }
-
-    public void setKoszt(float koszt) {
-        this.koszt = koszt;
     }
 
     public FormaPlatnosci getFormaPlatnosci() {
@@ -73,8 +71,9 @@ public class Platnosc implements IPlatnosc {
      */
     @Override
     public void payInAdvance(float przedplata) {
-        // Implement payInAdvance logic
         this.przedplata = przedplata;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.dataPrzedplaty = sdf.format(new Date());
     }
 
     /**
@@ -84,9 +83,10 @@ public class Platnosc implements IPlatnosc {
      */
     @Override
     public void payFullPrice(FormaPlatnosci formaPlatnosci) {
-        // Implement payFullPrice logic
         this.formaPlatnosci = formaPlatnosci;
-        this.koszt = 1000; // Example: set full cost to 1000 or however it's calculated
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.dataPlatnosci = sdf.format(new Date());
+        this.przedplata = koszt;
     }
 
     /**
@@ -96,7 +96,6 @@ public class Platnosc implements IPlatnosc {
      */
     @Override
     public float calculatePriceLeftToPay() {
-        // Calculate the remaining price to pay
         return this.koszt - this.przedplata;
     }
 }

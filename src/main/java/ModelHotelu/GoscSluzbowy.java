@@ -16,6 +16,16 @@ public class GoscSluzbowy extends Gosc {
 	private String specjalneZyczenia;
 	private AdresZamieszkania adresZamieszkania;
 
+	@Override
+	public AdresZamieszkania getAdresZamieszkania() {
+		return adresZamieszkania;
+	}
+
+	@Override
+	public void setAdresZamieszkania(AdresZamieszkania adresZamieszkania) {
+		this.adresZamieszkania = adresZamieszkania;
+	}
+
 	// Konstruktor
 	public GoscSluzbowy(String nazwaFirmy, int numerVat, int numerNip, String imieNazwisko, String numerTelefonu, String adresEmail, boolean czyDlaKogos, String specjalneZyczenia, AdresZamieszkania adresZamieszkania) {
 		this.nazwaFirmy = nazwaFirmy;
@@ -30,7 +40,6 @@ public class GoscSluzbowy extends Gosc {
 		this.adresZamieszkania = adresZamieszkania;
 	}
 
-	// Gettery i Settery
 	public String getNazwaFirmy() {
 		return nazwaFirmy;
 	}
@@ -106,20 +115,14 @@ public class GoscSluzbowy extends Gosc {
 	// Operacje na wspollokatorach
 	public void addRoommates(Wspollokator wspollokator) {
 		wspollokatorzy.add(wspollokator);
-		System.out.println("Dodano współlokatora: " + wspollokator.getImieNazwisko());
 	}
 
 	public void editContactInfo(String nowyNumer, String nowyEmail) {
 		this.numerTelefonu = nowyNumer;
 		this.adresEmail = nowyEmail;
-		System.out.println("Zaktualizowano dane kontaktowe dla: " + imieNazwisko);
 	}
 
 	public void deleteRoommate(Wspollokator wspollokator) {
-		if (wspollokatorzy.remove(wspollokator)) {
-			System.out.println("Usunięto współlokatora: " + wspollokator.getImieNazwisko());
-		} else {
-			System.out.println("Nie znaleziono współlokatora.");
-		}
+		wspollokatorzy.remove(wspollokator);
 	}
 }

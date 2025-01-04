@@ -3,7 +3,7 @@
     "dataRezerwacji": "2025-01-04",
     "zameldowanie": false,
     "wymeldowanie": false,
-    "numerRezerwacji": 1,
+    "numerRezerwacji": "1",
     "iloscDoroslych": 2,
     "iloscDzieci": 1,
     "platnosc": {

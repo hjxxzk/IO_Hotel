@@ -3,28 +3,28 @@ package ModelHotelu;
 import InterfejsHotelu.IHotel;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HotelFasada implements IHotel {
 
 	private List<Pokoj> pokoje;
-	private List<Rezerwacja> rezerwacja;
+	private List<Rezerwacja> rezerwacje;
 
 	public List<Pokoj> getPokoje() {
 		return this.pokoje;
 	}
 
-	public List<Rezerwacja> getRezerwacja() {
-		return this.rezerwacja;
+	public List<Rezerwacja> getRezerwacje() {
+		return this.rezerwacje;
 	}
 
 	public void setPokoje(List<Pokoj> pokoje) {
 		this.pokoje = pokoje;
 	}
 
-	public void setRezerwacja(List<Rezerwacja> rezerwacja) {
-		this.rezerwacja = rezerwacja;
+	public void setRezerwacje(List<Rezerwacja> rezerwacje) {
+		this.rezerwacje = rezerwacje;
 	}
 
 	/**
@@ -35,11 +35,17 @@ public class HotelFasada implements IHotel {
 	 * @param godzina_przyjazdu
 	 * @param gosc
 	 * @param pokoj
-	 * @param Termin
+	 * @param termin
 	 */
-	public void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin) {
-		// TODO - implement HotelFasada.makeReservation
-		throw new UnsupportedOperationException();
+	public void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
+		Rezerwacja nowaRezerwacja = new Rezerwacja(ilosc_doroslych, ilosc_dzieci, platnosc, godzina_przyjazdu, gosc, pokoj, termin);
+		rezerwacje.add(nowaRezerwacja);
+		for (Pokoj pokojZListy : pokoje) {
+			if (pokojZListy.equals(pokoj)) {
+				pokojZListy.addReservationDate(termin);
+				break;
+			}
+		}
 	}
 
 	/**
@@ -62,49 +68,54 @@ public class HotelFasada implements IHotel {
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	public void deleteReservation(int numer_rezerwacji) {
-		// TODO - implement HotelFasada.deleteReservation
-		throw new UnsupportedOperationException();
+	public void deleteReservation(String numer_rezerwacji) {
+		for (Rezerwacja rezerwacja : rezerwacje) {
+			if (rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji)) {
+				rezerwacje.remove(rezerwacja);
+				break;
+			}
+		}
 	}
 
-	public void displayTodaysGuests() {
-		// TODO - implement HotelFasada.displayTodaysGuests
-		throw new UnsupportedOperationException();
+	public List<Rezerwacja> displayTodaysGuests() {
+		List<Rezerwacja> todaysGuests = new ArrayList<>();
+		LocalDate today = LocalDate.now();
+
+		for (Rezerwacja rezerwacja : rezerwacje) {
+			Termin termin = rezerwacja.getTermin();
+			LocalDate startDate = LocalDate.parse(termin.getData_rozpoczecia_pobytu());
+			LocalDate endDate = LocalDate.parse(termin.getData_zakonczenia_pobytu());
+
+			if (startDate.equals(today) || endDate.equals(today)) {
+				todaysGuests.add(rezerwacja);
+			}
+		}
+		return todaysGuests;
 	}
 
 	/**
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	public void checkInGuests(int numer_rezerwacji) {
-		// TODO - implement HotelFasada.checkInGuests
-		throw new UnsupportedOperationException();
+	public void checkInGuests(String numer_rezerwacji) {
+		for (Rezerwacja rezerwacja : rezerwacje) {
+			if (rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji)) {
+				rezerwacja.checkIn();
+			}
+		}
 	}
 
 	/**
 	 * 
 	 * @param numer_rezerwacji
 	 */
-	public void checkOutGuests(int numer_rezerwacji) {
-		// TODO - implement HotelFasada.checkOutGuests
-		throw new UnsupportedOperationException();
+	public void checkOutGuests(String numer_rezerwacji) {
+		for (Rezerwacja rezerwacja : rezerwacje) {
+			if (rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji)) {
+				rezerwacja.checkOut();
+			}
+		}
 	}
-
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 */
-	public void logIn(String username, String password) {
-		// TODO - implement HotelFasada.logIn
-		throw new UnsupportedOperationException();
-	}
-
-	public void logOut() {
-		// TODO - implement HotelFasada.logOut
-		throw new UnsupportedOperationException();
-	}
-
 	public void checkInput() {
 		// TODO - implement HotelFasada.checkInput
 		throw new UnsupportedOperationException();

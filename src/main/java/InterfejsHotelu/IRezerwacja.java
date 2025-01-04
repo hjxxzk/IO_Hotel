@@ -2,18 +2,9 @@ package InterfejsHotelu;
 
 import ModelHotelu.FormaPlatnosci;
 
-import java.time.LocalDate;
-
 public interface IRezerwacja {
 
-	void generateReservationNumber();
-
-	/**
-	 * Dodaje informacje o płatności.
-	 * @param formaPlatnosci Forma płatności
-	 * @param przedplata Kwota przedpłaty
-	 */
-	void addPaymentInformation(FormaPlatnosci formaPlatnosci, float przedplata);
+	String generateReservationNumber();
 
 	/**
 	 * Ustawia termin rezerwacji.
