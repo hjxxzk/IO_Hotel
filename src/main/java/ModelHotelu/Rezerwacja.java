@@ -14,9 +14,9 @@ public class Rezerwacja implements IRezerwacja {
 	private int numerRezerwacji;
 	private int iloscDoroslych;
 	private int iloscDzieci;
-	private Platnosc platnosc; // Corrected to Platnosc (Payment)
+	private Platnosc platnosc;
 	private String godzinaPrzyjazdu;
-	private Gosc gosc; // Corrected to GoscFactoryMethod (Guest Factory)
+	private Gosc gosc;
 	private Pokoj pokoj;
 	private Termin termin;
 
@@ -46,6 +46,7 @@ public class Rezerwacja implements IRezerwacja {
 		this.termin = termin;
 	}
 
+	// Gettery i settery
 	public String getDataRezerwacji() {
 		return this.dataRezerwacji;
 	}
@@ -122,42 +123,44 @@ public class Rezerwacja implements IRezerwacja {
 		this.termin = termin;
 	}
 
-	public void generateReservationNumber() {
-		// TODO - implement Rezerwacja.generateReservationNumber
-		throw new UnsupportedOperationException();
+	@Override
+	public void setTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia) {
+		// Implementacja metody (jeśli potrzebna)
 	}
 
-	/**
-	 * Adds payment information (e.g., prepayment)
-	 *
-	 * @param formaPlatnosci Payment method
-	 * @param przedplata Prepayment amount
-	 */
+	// Dodanie metody toString
+	@Override
+	public String toString() {
+		return "Rezerwacja nr " + numerRezerwacji +
+				" | Gość: " + gosc.getImieNazwisko() +
+				" | Pokój: " + pokoj.getNumer() +
+				" | Data: " + termin.getData_rozpoczecia_pobytu() + " - " + termin.getData_zakonczenia_pobytu();
+	}
+
+	// Inne metody z interfejsu IRezerwacja
+	@Override
+	public void editTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia) {
+		// Implementacja metody (jeśli potrzebna)
+	}
+
+	@Override
+	public void editTermin(String dataRozpoczecia, String dataZakonczenia) {
+		// Implementacja metody (jeśli potrzebna)
+	}
+
+	public void generateReservationNumber() {
+		// Implementacja metody (jeśli potrzebna)
+	}
+
 	public void addPaymentInformation(FormaPlatnosci formaPlatnosci, float przedplata) {
-		// TODO - implement Rezerwacja.addPaymentInformation
-		throw new UnsupportedOperationException();
+		// Implementacja metody (jeśli potrzebna)
 	}
 
 	public void checkIn() {
-		// TODO - implement Rezerwacja.checkIn
-		throw new UnsupportedOperationException();
+		// Implementacja metody (jeśli potrzebna)
 	}
 
 	public void checkOut() {
-		// TODO - implement Rezerwacja.checkOut
-		throw new UnsupportedOperationException();
+		// Implementacja metody (jeśli potrzebna)
 	}
-
-	/**
-	 * Edits the reservation dates.
-	 *
-	 * @param dataRozpoczecia Start date of the reservation
-	 * @param dataZakonczenia End date of the reservation
-	 */
-	@Override
-	public void editTermin(String dataRozpoczecia, String dataZakonczenia) {
-		// TODO - implement Rezerwacja.editTermin
-		throw new UnsupportedOperationException();
-	}
-
 }

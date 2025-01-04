@@ -1,5 +1,7 @@
 package ViewHotelu;
 
+import ModelHotelu.HotelFasada;
+import ModelHotelu.Rezerwacja;
 import PrezenterHotelu.Logowanie;
 import PrezenterHotelu.RecepcjonistkaSingleton;
 
@@ -7,10 +9,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecepcjonistkaMenuView implements IMenuView {
 
 	Logowanie logowanie = new Logowanie();
+	HotelFasada hotel;
+
+	public RecepcjonistkaMenuView(HotelFasada hotel) {
+		this.hotel = hotel;
+	}
 
 	public void wyswietlCodziennychGosci() {
 		// TODO - implement RecepcjonistkaMenuView.wyswietlCodziennychGosci
@@ -117,7 +126,13 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		reservationLabel.setBounds(20, 60, 200, 20);
 		panel.add(reservationLabel);
 
-		JList<String> reservationList = new JList<>(new String[]{}); // TODO Pusta lista
+
+		List<Rezerwacja> rezerwacje = hotel.getRezerwacja();
+		List<String> rezerwacjeAsString = rezerwacje.stream()
+				.map(Object::toString) // Zastąp .toString() odpowiednią metodą
+				.toList();
+
+		JList<String> reservationList = new JList<>(rezerwacjeAsString.toArray(new String[0])); // TODO Pusta lista
 		JScrollPane reservationScrollPane = new JScrollPane(reservationList);
 		reservationScrollPane.setBounds(20, 90, 495, 300);
 		panel.add(reservationScrollPane);
