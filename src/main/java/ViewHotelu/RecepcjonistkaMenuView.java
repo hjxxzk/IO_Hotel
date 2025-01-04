@@ -257,7 +257,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		szczegoly.append("Ulica: ").append(rezerwacja.getGosc().getAdresZamieszkania().getUlica()).append("\n");
 		szczegoly.append("Numer domu: ").append(rezerwacja.getGosc().getAdresZamieszkania().getNumerDomu()).append("\n");
 		szczegoly.append("Numer mieszkania: ").append(
-				rezerwacja.getGosc().getAdresZamieszkania().getNumerMieszkania() != -1 ?
+				rezerwacja.getGosc().getAdresZamieszkania().getNumerMieszkania() != 0 ?
 						rezerwacja.getGosc().getAdresZamieszkania().getNumerMieszkania() : "Brak").append("\n");
 		szczegoly.append("Kod pocztowy: ").append(rezerwacja.getGosc().getAdresZamieszkania().getKodPocztowy()).append("\n");
 		szczegoly.append("Kraj: ").append(rezerwacja.getGosc().getAdresZamieszkania().getKraj()).append("\n");
