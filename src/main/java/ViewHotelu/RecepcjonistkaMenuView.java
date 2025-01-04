@@ -127,7 +127,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		panel.add(reservationLabel);
 
 
-		List<Rezerwacja> rezerwacje = hotel.getRezerwacja();
+		List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
 		List<String> rezerwacjeAsString = rezerwacje.stream()
 				.map(Object::toString) // Zastąp .toString() odpowiednią metodą
 				.toList();
