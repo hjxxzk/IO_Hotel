@@ -27,10 +27,10 @@ public interface IHotel {
 	 * @param godzina_przyjazdu
 	 * @param gosc
 	 * @param pokoj
-	 * @param Termin
+	 * @param termin
 	 * @param numer_rezerwacji
 	 */
-	void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin, int numer_rezerwacji);
+	void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin, String numer_rezerwacji, AdresZamieszkania adresZamieszkania);
 
 	/**
 	 * 
@@ -52,6 +52,6 @@ public interface IHotel {
 	 */
 	void checkOutGuests(String numer_rezerwacji);
 
-	void checkInput();
+	boolean checkInput(Rezerwacja nowaRezerwacja, Pokoj pokoj);
 
 }

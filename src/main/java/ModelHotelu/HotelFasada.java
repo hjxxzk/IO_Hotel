@@ -3,6 +3,7 @@ package ModelHotelu;
 import InterfejsHotelu.IHotel;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +40,13 @@ public class HotelFasada implements IHotel {
 	 */
 	public void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
 		Rezerwacja nowaRezerwacja = new Rezerwacja(ilosc_doroslych, ilosc_dzieci, platnosc, godzina_przyjazdu, gosc, pokoj, termin);
-		rezerwacje.add(nowaRezerwacja);
-		for (Pokoj pokojZListy : pokoje) {
-			if (pokojZListy.equals(pokoj)) {
-				pokojZListy.addReservationDate(termin);
-				break;
+		if(checkInput(nowaRezerwacja, pokoj))	{
+			rezerwacje.add(nowaRezerwacja);
+			for (Pokoj pokojZListy : pokoje) {
+				if (pokojZListy.equals(pokoj)) {
+					pokojZListy.addReservationDate(termin);
+					break;
+				}
 			}
 		}
 	}
@@ -56,12 +59,26 @@ public class HotelFasada implements IHotel {
 	 * @param godzina_przyjazdu
 	 * @param gosc
 	 * @param pokoj
-	 * @param Termin
+	 * @param termin
 	 * @param numer_rezerwacji
 	 */
-	public void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, LocalDate godzina_przyjazdu, Gosc gosc, Pokoj pokoj, LocalDate Termin, int numer_rezerwacji) {
-		// TODO - implement HotelFasada.editReservation
-		throw new UnsupportedOperationException();
+	public void editReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin, String numer_rezerwacji, AdresZamieszkania adresZamieszkania) {
+		for (Rezerwacja rezerwacja : rezerwacje) {
+			if (rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji)) {
+				for (Pokoj pokojZListy : pokoje) {
+					if (pokojZListy.getNumer().equals(pokoj.getNumer())) {
+						pokojZListy.editReservationDate(rezerwacja.getTermin().getData_rozpoczecia_pobytu(), rezerwacja.getTermin().getData_zakonczenia_pobytu(),
+								termin.getData_rozpoczecia_pobytu(), termin.getData_zakonczenia_pobytu());
+						break;
+					}
+				}
+				rezerwacja.setTermin(termin);
+				rezerwacja.setPlatnosc(platnosc);
+				rezerwacja.setGodzinaPrzyjazdu(godzina_przyjazdu);
+				rezerwacja.setGosc(gosc);
+				rezerwacja.getGosc().setAdresZamieszkania(adresZamieszkania);
+			}
+		}
 	}
 
 	/**
@@ -116,9 +133,32 @@ public class HotelFasada implements IHotel {
 			}
 		}
 	}
-	public void checkInput() {
-		// TODO - implement HotelFasada.checkInput
-		throw new UnsupportedOperationException();
+	public boolean checkInput(Rezerwacja nowaRezerwacja, Pokoj pokoj) {
+        return !czyTerminJestJuzZajety(nowaRezerwacja, pokoj) && czyIloscMiejscSieZgadza(nowaRezerwacja, pokoj);
+	}
+
+	public boolean czyIloscMiejscSieZgadza(Rezerwacja nowaRezerwacja, Pokoj pokoj)	{
+		return nowaRezerwacja.getIloscDzieci() + nowaRezerwacja.getIloscDoroslych() <= pokoj.getLiczbaGosci();
+	}
+
+	public boolean czyTerminJestJuzZajety(Rezerwacja nowaRezerwacja, Pokoj pokoj)	{
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		LocalDate nowyStart = LocalDate.parse(nowaRezerwacja.getTermin().getData_rozpoczecia_pobytu(), formatter);
+		LocalDate nowyEnd = LocalDate.parse(nowaRezerwacja.getTermin().getData_zakonczenia_pobytu(), formatter);
+
+		// Sprawdzamy każdy termin w liście, czy zachodzi nakładanie
+		for (Termin t : pokoj.getTerminy()) {
+			LocalDate start = LocalDate.parse(t.getData_rozpoczecia_pobytu(), formatter);
+			LocalDate end = LocalDate.parse(t.getData_zakonczenia_pobytu(), formatter);
+
+			if ((nowyStart.isBefore(end) && nowyEnd.isAfter(start)) ||
+					(nowyStart.isEqual(start) || nowyEnd.isEqual(end))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -20,6 +20,11 @@ public class Rezerwacja implements IRezerwacja {
 	private String godzinaPrzyjazdu;
 	private Gosc gosc;
 	private Pokoj pokoj;
+
+	public void setTermin(Termin termin) {
+		this.termin = termin;
+	}
+
 	private Termin termin;
 
 	@JsonCreator
