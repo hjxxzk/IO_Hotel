@@ -28,6 +28,7 @@ public interface IRezerwacja {
 	 * @param dataRozpoczecia Nowa data rozpoczęcia
 	 * @param dataZakonczenia Nowa data zakończenia
 	 */
-	void editTermin(String dataRozpoczecia, String dataZakonczenia);
+	void editTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
 
+	void editTermin(String dataRozpoczecia, String dataZakonczenia);
 }
