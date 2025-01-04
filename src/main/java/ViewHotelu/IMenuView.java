@@ -6,4 +6,6 @@ public interface IMenuView {
 
 	void wyswietlCodziennychGosci();
 
+	 void RecepcjonistkaMenuView();
+
 }

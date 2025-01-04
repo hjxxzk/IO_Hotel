@@ -10,7 +10,6 @@ public class HotelFasada implements IHotel {
 
 	private List<Pokoj> pokoje;
 	private List<Rezerwacja> rezerwacja;
-	private HashMap<String, String> Recepcjonistki;
 
 	public List<Pokoj> getPokoje() {
 		return this.pokoje;
@@ -18,10 +17,6 @@ public class HotelFasada implements IHotel {
 
 	public List<Rezerwacja> getRezerwacja() {
 		return this.rezerwacja;
-	}
-
-	public HashMap<String, String> getRecepcjonistki() {
-		return this.Recepcjonistki;
 	}
 
 	/**

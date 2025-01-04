@@ -1,13 +1,16 @@
 package PrezenterHotelu;
 
+import ViewHotelu.IMenuView;
+import ViewHotelu.RecepcjonistkaMenuView;
+
 public class Prezenter {
 
-	private int IMenu;
+	public static void main(String[] args) {
+		IMenuView menuRecepcjonistki = new RecepcjonistkaMenuView();
+		menuRecepcjonistki.wyswietl();
 
-	public void main() {
-		// TODO - implement Prezenter.main
-		throw new UnsupportedOperationException();
 	}
+
 
 	public void setMenu() {
 		// TODO - implement Prezenter.setMenu

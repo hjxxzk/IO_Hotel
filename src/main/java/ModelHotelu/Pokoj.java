@@ -12,7 +12,7 @@ public class Pokoj implements IPokoj {
     private int liczbaGosci;
     private String standard;
     private String udogodnienia;
-    private List<LocalDate> terminy;
+    private List<Termin> terminy;
     private int koszt;
 
     public String getNumer() {
@@ -35,7 +35,7 @@ public class Pokoj implements IPokoj {
         return this.udogodnienia;
     }
 
-    public List<LocalDate> getTerminy() {
+    public List<Termin> getTerminy() {
         return this.terminy;
     }
 
