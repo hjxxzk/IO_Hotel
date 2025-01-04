@@ -1,6 +1,8 @@
 package ModelHotelu;
 
 import InterfejsHotelu.IPokoj;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +16,27 @@ public class Pokoj implements IPokoj {
     private String udogodnienia;
     private List<Termin> terminy;
     private int koszt;
+
+    @JsonCreator
+    public Pokoj(
+            @JsonProperty("numer") String numer,
+            @JsonProperty("pietro") int pietro,
+            @JsonProperty("liczbaGosci") int liczbaGosci,
+            @JsonProperty("standard") String standard,
+            @JsonProperty("udogodnienia") String udogodnienia,
+            @JsonProperty("terminy") List<Termin> terminy,
+            @JsonProperty("koszt") int koszt) {
+        this.numer = numer;
+        this.pietro = pietro;
+        this.liczbaGosci = liczbaGosci;
+        this.standard = standard;
+        this.udogodnienia = udogodnienia;
+        this.terminy = terminy;
+        this.koszt = koszt;
+    }
+    public void setTerminy(List<Termin> terminy) {
+        this.terminy = terminy;
+    }
 
     public String getNumer() {
         return this.numer;

@@ -19,6 +19,14 @@ public class HotelFasada implements IHotel {
 		return this.rezerwacja;
 	}
 
+	public void setPokoje(List<Pokoj> pokoje) {
+		this.pokoje = pokoje;
+	}
+
+	public void setRezerwacja(List<Rezerwacja> rezerwacja) {
+		this.rezerwacja = rezerwacja;
+	}
+
 	/**
 	 * 
 	 * @param ilosc_doroslych

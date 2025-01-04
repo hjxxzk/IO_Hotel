@@ -1,27 +1,56 @@
 package ModelHotelu;
 
 import InterfejsHotelu.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class Rezerwacja implements IRezerwacja {
 
-	private LocalDate dataRezerwacji;
+	private String dataRezerwacji;
 	private boolean zameldowanie;
 	private boolean wymeldowanie;
 	private int numerRezerwacji;
 	private int iloscDoroslych;
 	private int iloscDzieci;
 	private Platnosc platnosc; // Corrected to Platnosc (Payment)
-	private LocalDate godzinaPrzyjazdu;
+	private String godzinaPrzyjazdu;
 	private Gosc gosc; // Corrected to GoscFactoryMethod (Guest Factory)
 	private Pokoj pokoj;
-	private LocalDate termin;
+	private Termin termin;
 
-	public LocalDate getDataRezerwacji() {
+	@JsonCreator
+	public Rezerwacja(
+			@JsonProperty("dataRezerwacji") String dataRezerwacji,
+			@JsonProperty("zameldowanie") boolean zameldowanie,
+			@JsonProperty("wymeldowanie") boolean wymeldowanie,
+			@JsonProperty("numerRezerwacji") int numerRezerwacji,
+			@JsonProperty("iloscDoroslych") int iloscDoroslych,
+			@JsonProperty("iloscDzieci") int iloscDzieci,
+			@JsonProperty("platnosc") Platnosc platnosc,
+			@JsonProperty("godzinaPrzyjazdu") String godzinaPrzyjazdu,
+			@JsonProperty("gosc") Gosc gosc,
+			@JsonProperty("pokoj") Pokoj pokoj,
+			@JsonProperty("termin") Termin termin) {
+		this.dataRezerwacji = dataRezerwacji;
+		this.zameldowanie = zameldowanie;
+		this.wymeldowanie = wymeldowanie;
+		this.numerRezerwacji = numerRezerwacji;
+		this.iloscDoroslych = iloscDoroslych;
+		this.iloscDzieci = iloscDzieci;
+		this.platnosc = platnosc;
+		this.godzinaPrzyjazdu = godzinaPrzyjazdu;
+		this.gosc = gosc;
+		this.pokoj = pokoj;
+		this.termin = termin;
+	}
+
+	public String getDataRezerwacji() {
 		return this.dataRezerwacji;
 	}
 
-	public void setDataRezerwacji(LocalDate dataRezerwacji) {
+	public void setDataRezerwacji(String dataRezerwacji) {
 		this.dataRezerwacji = dataRezerwacji;
 	}
 
@@ -61,11 +90,11 @@ public class Rezerwacja implements IRezerwacja {
 		this.platnosc = platnosc;
 	}
 
-	public LocalDate getGodzinaPrzyjazdu() {
+	public String getGodzinaPrzyjazdu() {
 		return this.godzinaPrzyjazdu;
 	}
 
-	public void setGodzinaPrzyjazdu(LocalDate godzinaPrzyjazdu) {
+	public void setGodzinaPrzyjazdu(String godzinaPrzyjazdu) {
 		this.godzinaPrzyjazdu = godzinaPrzyjazdu;
 	}
 
@@ -85,11 +114,11 @@ public class Rezerwacja implements IRezerwacja {
 		this.pokoj = pokoj;
 	}
 
-	public LocalDate getTermin() {
+	public Termin getTermin() {
 		return this.termin;
 	}
 
-	public void setTermin(LocalDate dataRezerwacji, LocalDate dataZakonczenia) {
+	public void setTermin(String dataRezerwacji, String dataZakonczenia) {
 		this.termin = termin;
 	}
 
@@ -125,7 +154,8 @@ public class Rezerwacja implements IRezerwacja {
 	 * @param dataRozpoczecia Start date of the reservation
 	 * @param dataZakonczenia End date of the reservation
 	 */
-	public void editTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia) {
+	@Override
+	public void editTermin(String dataRozpoczecia, String dataZakonczenia) {
 		// TODO - implement Rezerwacja.editTermin
 		throw new UnsupportedOperationException();
 	}

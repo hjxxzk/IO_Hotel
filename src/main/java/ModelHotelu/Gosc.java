@@ -1,12 +1,26 @@
 package ModelHotelu;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.List;
 
 /**
  * Factory Method
  */
-public abstract class Gosc {
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "typ"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = GoscPrywatny.class, name = "prywatny"),
+        @JsonSubTypes.Type(value = GoscSluzbowy.class, name = "sluzbowy"),
+        @JsonSubTypes.Type(value = Wspollokator.class, name = "wspollokator")
+})
+public abstract class Gosc {
+    private AdresZamieszkania adresZamieszkania;
     private String imieNazwisko;
     private String numerTelefonu;
     private String adresEmail;

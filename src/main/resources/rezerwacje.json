@@ -1,0 +1,59 @@
+[
+  {
+    "dataRezerwacji": "2025-01-04",
+    "zameldowanie": false,
+    "wymeldowanie": false,
+    "numerRezerwacji": 1,
+    "iloscDoroslych": 2,
+    "iloscDzieci": 1,
+    "platnosc": {
+      "przedplata": 50.0,
+      "koszt": 250.0,
+      "formaPlatnosci": "KARTA",
+      "dataPlatnosci": "2025-01-04",
+      "dataPrzedplaty": "2025-01-04"
+    },
+    "godzinaPrzyjazdu": "2025-01-11T14:00:00",
+    "gosc": {
+      "typ": "prywatny",
+      "imieNazwisko": "Jan Kowalski",
+      "numerTelefonu": "+48 123 456 789",
+      "adresEmail": "jan.kowalski@example.com",
+      "czyDlaKogos": false,
+      "wspollokatorzy": [
+        {
+          "typ": "wspollokator",
+          "imieNazwisko": "Anna Kowalska",
+          "adresEmail": "anna.kowalska@example.com"
+        }
+      ],
+      "specjalneZyczenia": "Brak",
+      "adresZamieszkania": {
+        "miejscowosc": "Warszawa",
+        "ulica": "ul. Kwiatowa",
+        "numerDomu": "15",
+        "numerMieszkania": null,
+        "kodPocztowy": "00-001",
+        "kraj": "Polska"
+      }
+    },
+    "pokoj": {
+      "numer": "101",
+      "pietro": 1,
+      "liczbaGosci": 3,
+      "standard": "Deluxe",
+      "udogodnienia": "TV, Wi-Fi, klimatyzacja",
+      "terminy": [
+        {
+          "od": "2025-01-11",
+          "do": "2025-01-13"
+        }
+      ],
+      "koszt": 250
+    },
+    "termin": {
+      "data_rozpoczecia_pobytu": "2025-01-11",
+      "data_zakonczenia_pobytu": "2025-01-13"
+    }
+  }
+]
