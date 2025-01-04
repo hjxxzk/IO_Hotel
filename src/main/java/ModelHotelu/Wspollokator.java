@@ -1,12 +1,17 @@
 package ModelHotelu;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Wspollokator extends Gosc {
 
     private String imieNazwisko;
     private String adresEmail;
 
     // Konstruktor
-    public Wspollokator(String imieNazwisko, String adresEmail) {
+    @JsonCreator
+    public Wspollokator(@JsonProperty("imieNazwisko") String imieNazwisko,
+                        @JsonProperty("adresEmail") String adresEmail) {
         this.imieNazwisko = imieNazwisko;
         this.adresEmail = adresEmail;
     }

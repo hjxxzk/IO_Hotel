@@ -1,5 +1,8 @@
 package ModelHotelu;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class GoscPrywatny extends Gosc {
@@ -11,12 +14,27 @@ public class GoscPrywatny extends Gosc {
 	private List<Wspollokator> wspollokatorzy;
 	private String specjalneZyczenia;
 
-	public GoscPrywatny(String imieNazwisko, String numerTelefonu, String adresEmail, boolean czyDlaKogos, String specjalneZyczenia) {
-		setImieNazwisko(imieNazwisko);
-		setNumerTelefonu(numerTelefonu);
-		setAdresEmail(adresEmail);
-		setCzyDlaKogos(czyDlaKogos);
-		setSpecjalneZyczenia(specjalneZyczenia);
+	private AdresZamieszkania adresZamieszkania;
+
+	@JsonCreator
+	public GoscPrywatny(
+			@JsonProperty("imieNazwisko") String imieNazwisko,
+			@JsonProperty("numerTelefonu") String numerTelefonu,
+			@JsonProperty("adresEmail") String adresEmail,
+			@JsonProperty("czyDlaKogos") boolean czyDlaKogos,
+			@JsonProperty("specjalneZyczenia") String specjalneZyczenia,
+			@JsonProperty("adresZamieszkania") AdresZamieszkania adresZamieszkania
+	) {
+		this.imieNazwisko = imieNazwisko;
+		this.numerTelefonu = numerTelefonu;
+		this.adresEmail = adresEmail;
+		this.czyDlaKogos = czyDlaKogos;
+		this.specjalneZyczenia = specjalneZyczenia;
+		this.adresZamieszkania = adresZamieszkania;
+	}
+
+	public void setAdresZamieszkania(AdresZamieszkania adresZamieszkania) {
+		this.adresZamieszkania = adresZamieszkania;
 	}
 
 	private void setAddress() {

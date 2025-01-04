@@ -14,9 +14,10 @@ public class GoscSluzbowy extends Gosc {
 	private boolean czyDlaKogos;
 	private List<Wspollokator> wspollokatorzy;
 	private String specjalneZyczenia;
+	private AdresZamieszkania adresZamieszkania;
 
 	// Konstruktor
-	public GoscSluzbowy(String nazwaFirmy, int numerVat, int numerNip, String imieNazwisko, String numerTelefonu, String adresEmail, boolean czyDlaKogos, String specjalneZyczenia) {
+	public GoscSluzbowy(String nazwaFirmy, int numerVat, int numerNip, String imieNazwisko, String numerTelefonu, String adresEmail, boolean czyDlaKogos, String specjalneZyczenia, AdresZamieszkania adresZamieszkania) {
 		this.nazwaFirmy = nazwaFirmy;
 		this.numerVat = numerVat;
 		this.numerNip = numerNip;
@@ -26,6 +27,7 @@ public class GoscSluzbowy extends Gosc {
 		this.wspollokatorzy = new ArrayList<>();
 		this.czyDlaKogos = czyDlaKogos;
 		this.specjalneZyczenia = specjalneZyczenia;
+		this.adresZamieszkania = adresZamieszkania;
 	}
 
 	// Gettery i Settery

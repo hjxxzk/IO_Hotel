@@ -1,6 +1,8 @@
 package ModelHotelu;
 
 import InterfejsHotelu.IPlatnosc;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
@@ -9,9 +11,21 @@ public class Platnosc implements IPlatnosc {
     private float przedplata;
     private float koszt;
     private FormaPlatnosci formaPlatnosci;
-    private LocalDate dataPlatnosci;
-    private LocalDate dataPrzedplaty;
-
+    private String dataPlatnosci;
+    private String dataPrzedplaty;
+    @JsonCreator
+    public Platnosc(
+            @JsonProperty("przedplata") float przedplata,
+            @JsonProperty("koszt") float koszt,
+            @JsonProperty("formaPlatnosci") FormaPlatnosci formaPlatnosci,
+            @JsonProperty("dataPlatnosci") String dataPlatnosci,
+            @JsonProperty("dataPrzedplaty") String dataPrzedplaty) {
+        this.przedplata = przedplata;
+        this.koszt = koszt;
+        this.formaPlatnosci = formaPlatnosci;
+        this.dataPlatnosci = dataPlatnosci;
+        this.dataPrzedplaty = dataPrzedplaty;
+    }
     public float getPrzedplata() {
         return this.przedplata;
     }
@@ -36,19 +50,19 @@ public class Platnosc implements IPlatnosc {
         this.formaPlatnosci = formaPlatnosci;
     }
 
-    public LocalDate getDataPlatnosci() {
+    public String getDataPlatnosci() {
         return this.dataPlatnosci;
     }
 
-    public void setDataPlatnosci(LocalDate dataPlatnosci) {
+    public void setDataPlatnosci(String dataPlatnosci) {
         this.dataPlatnosci = dataPlatnosci;
     }
 
-    public LocalDate getDataPrzedplaty() {
+    public String getDataPrzedplaty() {
         return this.dataPrzedplaty;
     }
 
-    public void setDataPrzedplaty(LocalDate dataPrzedplaty) {
+    public void setDataPrzedplaty(String dataPrzedplaty) {
         this.dataPrzedplaty = dataPrzedplaty;
     }
 

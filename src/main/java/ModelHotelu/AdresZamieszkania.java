@@ -1,5 +1,8 @@
 package ModelHotelu;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AdresZamieszkania {
 
 	private String miejscowosc;
@@ -10,11 +13,17 @@ public class AdresZamieszkania {
 	private String kraj;
 
 	// Konstruktor
-	public AdresZamieszkania(String miejscowosc, String ulica, String numerDomu, int numerMieszkania, String kodPocztowy, String kraj) {
+	@JsonCreator
+	public AdresZamieszkania(
+			@JsonProperty("miejscowosc") String miejscowosc,
+			@JsonProperty("ulica") String ulica,
+			@JsonProperty("numerDomu") String numerDomu,
+			@JsonProperty("kodPocztowy") String kodPocztowy,
+			@JsonProperty("kraj") String kraj
+	) {
 		this.miejscowosc = miejscowosc;
 		this.ulica = ulica;
 		this.numerDomu = numerDomu;
-		this.numerMieszkania = numerMieszkania;
 		this.kodPocztowy = kodPocztowy;
 		this.kraj = kraj;
 	}
