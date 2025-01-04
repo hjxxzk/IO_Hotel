@@ -127,12 +127,11 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		panel.add(reservationLabel);
 
 
-		List<Rezerwacja> rezerwacje = hotel.getRezerwacja();
-		List<String> rezerwacjeAsString = rezerwacje.stream()
-				.map(Object::toString) // Zastąp .toString() odpowiednią metodą
-				.toList();
+		List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
+		JList<String> reservationList = new JList<>(rezerwacje.stream()
+				.map(this::rezerwacjaToString)  // Użycie metody rezerwacjaToString
+				.toArray(String[]::new));
 
-		JList<String> reservationList = new JList<>(rezerwacjeAsString.toArray(new String[0])); // TODO Pusta lista
 		JScrollPane reservationScrollPane = new JScrollPane(reservationList);
 		reservationScrollPane.setBounds(20, 90, 495, 300);
 		panel.add(reservationScrollPane);
@@ -186,6 +185,13 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		// Dodanie panelu do ramki i wyświetlenie
 		frame.add(panel);
 		frame.setVisible(true);
+	}
+
+	public String rezerwacjaToString(Rezerwacja rezerwacja) {
+		return "Rezerwacja nr " + rezerwacja.getNumerRezerwacji() +
+				" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
+				" | Pokój: " + rezerwacja.getPokoj().getNumer() +
+				" | Data: " + rezerwacja.getTermin().getData_rozpoczecia_pobytu() + " - " + rezerwacja.getTermin().getData_zakonczenia_pobytu();
 	}
 
 	public void pokazOkienkoWylogowania(String imieRecepcjonistki) {

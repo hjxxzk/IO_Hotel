@@ -11,7 +11,7 @@ public interface IRezerwacja {
 	 * @param dataRozpoczecia Data rozpoczęcia rezerwacji
 	 * @param dataZakonczenia Data zakończenia rezerwacji
 	 */
-	void setTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
+	void setTermin(String dataRozpoczecia, String dataZakonczenia);
 
 	/**
 	 * Realizuje proces zameldowania.
@@ -28,7 +28,6 @@ public interface IRezerwacja {
 	 * @param dataRozpoczecia Nowa data rozpoczęcia
 	 * @param dataZakonczenia Nowa data zakończenia
 	 */
-	void editTermin(LocalDate dataRozpoczecia, LocalDate dataZakonczenia);
 
 	void editTermin(String dataRozpoczecia, String dataZakonczenia);
 }

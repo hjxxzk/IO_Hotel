@@ -32,7 +32,7 @@ public abstract class Gosc {
     }
 
     public AdresZamieszkania getAdresZamieszkania() {
-        return adresZamieszkania;
+        return this.adresZamieszkania;
     }
 
     public void setAdresZamieszkania(AdresZamieszkania adresZamieszkania) {
