@@ -1,0 +1,271 @@
+[{
+  "numer": "101",
+  "pietro": 1,
+  "liczbaGosci": 3,
+  "standard": "Deluxe",
+  "udogodnienia": "TV, Wi-Fi, klimatyzacja",
+  "terminy": [
+    {
+      "od": "2025-01-11",
+      "do": "2025-01-13"
+    },
+    {
+      "od": "2025-01-16",
+      "do": "2025-01-18"
+    }
+  ],
+  "koszt": 250
+},
+{
+"numer": "102",
+"pietro": 1,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-11",
+"do": "2025-01-13"
+},
+{
+"od": "2025-01-16",
+"do": "2025-01-18"
+}
+],
+"koszt": 150
+},
+{
+"numer": "103",
+"pietro": 1,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-11",
+"do": "2025-01-13"
+},
+{
+"od": "2025-01-16",
+"do": "2025-01-18"
+}
+],
+"koszt": 250
+},
+{
+"numer": "104",
+"pietro": 1,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-11",
+"do": "2025-01-13"
+},
+{
+"od": "2025-01-16",
+"do": "2025-01-18"
+}
+],
+"koszt": 150
+},
+{
+"numer": "105",
+"pietro": 1,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-11",
+"do": "2025-01-13"
+},
+{
+"od": "2025-01-16",
+"do": "2025-01-18"
+}
+],
+"koszt": 250
+},
+{
+"numer": "201",
+"pietro": 2,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-12",
+"do": "2025-01-14"
+},
+{
+"od": "2025-01-17",
+"do": "2025-01-19"
+}
+],
+"koszt": 250
+},
+{
+"numer": "202",
+"pietro": 2,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-12",
+"do": "2025-01-14"
+},
+{
+"od": "2025-01-17",
+"do": "2025-01-19"
+}
+],
+"koszt": 150
+},
+{
+"numer": "203",
+"pietro": 2,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-12",
+"do": "2025-01-14"
+},
+{
+"od": "2025-01-17",
+"do": "2025-01-19"
+}
+],
+"koszt": 250
+},
+{
+"numer": "204",
+"pietro": 2,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-12",
+"do": "2025-01-14"
+},
+{
+"od": "2025-01-17",
+"do": "2025-01-19"
+}
+],
+"koszt": 150
+},
+{
+"numer": "205",
+"pietro": 2,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-12",
+"do": "2025-01-14"
+},
+{
+"od": "2025-01-17",
+"do": "2025-01-19"
+}
+],
+"koszt": 250
+},
+{
+"numer": "301",
+"pietro": 3,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-13",
+"do": "2025-01-15"
+},
+{
+"od": "2025-01-18",
+"do": "2025-01-20"
+}
+],
+"koszt": 250
+},
+{
+"numer": "302",
+"pietro": 3,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-13",
+"do": "2025-01-15"
+},
+{
+"od": "2025-01-18",
+"do": "2025-01-20"
+}
+],
+"koszt": 150
+},
+{
+"numer": "303",
+"pietro": 3,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-13",
+"do": "2025-01-15"
+},
+{
+"od": "2025-01-18",
+"do": "2025-01-20"
+}
+],
+"koszt": 250
+},
+{
+"numer": "304",
+"pietro": 3,
+"liczbaGosci": 2,
+"standard": "Standard",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-13",
+"do": "2025-01-15"
+},
+{
+"od": "2025-01-18",
+"do": "2025-01-20"
+}
+],
+"koszt": 150
+},
+{
+"numer": "305",
+"pietro": 3,
+"liczbaGosci": 3,
+"standard": "Deluxe",
+"udogodnienia": "TV, Wi-Fi, klimatyzacja",
+"terminy": [
+{
+"od": "2025-01-13",
+"do": "2025-01-15"
+},
+{
+"od": "2025-01-18",
+"do": "2025-01-20"
+}
+],
+"koszt": 250
+}
+]
