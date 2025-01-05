@@ -237,11 +237,8 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = reservationList.getSelectedIndex();
-				if (selectedIndex == -1) {
-					Rezerwacja selectedReservation = null; // Pobierz wybraną rezerwację
-					rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
-				}
+				Rezerwacja selectedReservation = null; // Pobierz wybraną rezerwację
+				rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
 			}
 		});
 
