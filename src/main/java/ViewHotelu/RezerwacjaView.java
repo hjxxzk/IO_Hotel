@@ -144,7 +144,7 @@ public class RezerwacjaView implements IRezerwacjaView {
 		return null;
 	}
 
-	public void zapisDanychRezerwacjiView(){
+	public void zapisDanychRezerwacjiView(Rezerwacja selectedReservation){
 		// Tworzenie głównego okna
 		JFrame frame = new JFrame("Edytuj Rezerwację");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -318,6 +318,27 @@ public class RezerwacjaView implements IRezerwacjaView {
 		// Wyświetlenie okna
 		frame.setVisible(true);
 
+		// Wypełnienie pól tekstowych danymi wybranej rezerwacji
+		imieNazwiskoField.setText(selectedReservation.getGosc().getImieNazwisko());
+		numerTelefonuField.setText(selectedReservation.getGosc().getNumerTelefonu());
+		adresEmailField.setText(selectedReservation.getGosc().getAdresEmail());
+		iloscDoroslychField.setText(String.valueOf(selectedReservation.getIloscDoroslych()));
+		iloscDzieciField.setText(String.valueOf(selectedReservation.getIloscDzieci()));
+		godzinaPrzyjazduField.setText(selectedReservation.getGodzinaPrzyjazdu());
+		specjalneZyczeniaField.setText(selectedReservation.getGosc().getSpecjalneZyczenia());
+		czyDlaInnejOsobyCheckBox.setSelected(selectedReservation.getGosc().isCzyDlaKogos());
+
+		//nazwaFirmyField.setText(selectedReservation.);
+		//numerVATField.setText(selectedReservation.getNumerVAT());
+		//numerNIPField.setText(selectedReservation.getNumerNIP()); - TODO gosc prywatny bo nie dziala
+
+		ulicaField.setText(selectedReservation.getGosc().getAdresZamieszkania().getUlica());
+		numerDomuField.setText(selectedReservation.getGosc().getAdresZamieszkania().getNumerDomu());
+		numerMieszkaniaField.setText(String.valueOf(selectedReservation.getGosc().getAdresZamieszkania().getNumerMieszkania()));
+		miejscowoscField.setText(selectedReservation.getGosc().getAdresZamieszkania().getMiejscowosc());
+		kodPocztowyField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKodPocztowy());
+		krajField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKraj());
+
 		wspollokatorzyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -329,6 +350,13 @@ public class RezerwacjaView implements IRezerwacjaView {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				wyswietlDodajPlatnoscButton();
+			}
+		});
+
+		zapiszButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				// Dodaj kod zapisu danych rezerwacji
 			}
 		});
 	}

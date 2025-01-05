@@ -201,7 +201,20 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				rezerwacja.zapisDanychRezerwacjiView();
+				//rezerwacja.zapisDanychRezerwacjiView();
+			}
+		});
+
+		editButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				int selectedIndex = reservationList.getSelectedIndex(); // Pobierz indeks wybranej rezerwacji
+				if (selectedIndex != -1) {
+					Rezerwacja selectedReservation = rezerwacje.get(selectedIndex); // Pobierz wybraną rezerwację
+					rezerwacja.zapisDanychRezerwacjiView(selectedReservation); // Wywołaj metodę z danymi wybranej rezerwacji
+				} else {
+					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
