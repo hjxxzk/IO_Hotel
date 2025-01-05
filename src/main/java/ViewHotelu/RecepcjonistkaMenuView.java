@@ -221,17 +221,12 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedIndex = reservationList.getSelectedIndex();
-				System.out.println(selectedIndex);
 				if (selectedIndex != -1) {
-					String numerRezerwacjiDoUsunięcia = String.valueOf(selectedIndex);
-					System.out.println(numerRezerwacjiDoUsunięcia);
+					String numerRezerwacjiDoUsunięcia = rezerwacje.get(selectedIndex).getNumerRezerwacji();
 					hotel.deleteReservation(numerRezerwacjiDoUsunięcia);
 					reservationList.setListData(hotel.getRezerwacje().stream()
-							.map(this::rezerwacjaToString)  // Odwołanie się bezpośrednio do metody `rezerwacjaToString` w tej samej klasie
+							.map(this::rezerwacjaToString)
 							.toArray(String[]::new));
-
-				} else {
-					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			private String rezerwacjaToString(Rezerwacja rezerwacja) {
