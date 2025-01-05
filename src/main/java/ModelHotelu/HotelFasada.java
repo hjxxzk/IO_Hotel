@@ -133,32 +133,41 @@ public class HotelFasada implements IHotel {
 			}
 		}
 	}
+
+	public List<Pokoj> listaDostepnychPokoi(String dataPrzyjazdu, String dataWyjazdu, int iloscDzieci, int iloscDoroslych)	{
+		List<Pokoj> dostepnePokoje = new ArrayList<>();
+		for(Pokoj pokoj : pokoje)	{
+			if(czyTerminJestWolny(dataPrzyjazdu, dataWyjazdu, pokoj) && (iloscDoroslych + iloscDzieci) <= pokoj.getLiczbaGosci())	{
+				dostepnePokoje.add(pokoj);
+			}
+		}
+		return dostepnePokoje;
+	}
+
 	public boolean checkInput(Rezerwacja nowaRezerwacja, Pokoj pokoj) {
-        return !czyTerminJestJuzZajety(nowaRezerwacja, pokoj) && czyIloscMiejscSieZgadza(nowaRezerwacja, pokoj);
+        return czyTerminJestWolny(nowaRezerwacja.getTermin().getData_rozpoczecia_pobytu(), nowaRezerwacja.getTermin().getData_zakonczenia_pobytu(), pokoj) && czyIloscMiejscSieZgadza(nowaRezerwacja, pokoj);
 	}
 
 	public boolean czyIloscMiejscSieZgadza(Rezerwacja nowaRezerwacja, Pokoj pokoj)	{
 		return nowaRezerwacja.getIloscDzieci() + nowaRezerwacja.getIloscDoroslych() <= pokoj.getLiczbaGosci();
 	}
 
-	public boolean czyTerminJestJuzZajety(Rezerwacja nowaRezerwacja, Pokoj pokoj)	{
+	public boolean czyTerminJestWolny(String dataPrzyjazdu, String dataWyjazdu, Pokoj pokoj)	{
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate nowyStart = LocalDate.parse(dataPrzyjazdu, formatter);
+		LocalDate nowyEnd = LocalDate.parse(dataWyjazdu, formatter);
 
-		LocalDate nowyStart = LocalDate.parse(nowaRezerwacja.getTermin().getData_rozpoczecia_pobytu(), formatter);
-		LocalDate nowyEnd = LocalDate.parse(nowaRezerwacja.getTermin().getData_zakonczenia_pobytu(), formatter);
-
-		// Sprawdzamy każdy termin w liście, czy zachodzi nakładanie
 		for (Termin t : pokoj.getTerminy()) {
 			LocalDate start = LocalDate.parse(t.getData_rozpoczecia_pobytu(), formatter);
 			LocalDate end = LocalDate.parse(t.getData_zakonczenia_pobytu(), formatter);
 
 			if ((nowyStart.isBefore(end) && nowyEnd.isAfter(start)) ||
 					(nowyStart.isEqual(start) || nowyEnd.isEqual(end))) {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 }

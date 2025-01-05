@@ -1,7 +1,9 @@
 package ViewHotelu;
 
+import ModelHotelu.Gosc;
 import ModelHotelu.HotelFasada;
 import ModelHotelu.Rezerwacja;
+import ModelHotelu.Termin;
 import PrezenterHotelu.Logowanie;
 import PrezenterHotelu.RecepcjonistkaSingleton;
 
