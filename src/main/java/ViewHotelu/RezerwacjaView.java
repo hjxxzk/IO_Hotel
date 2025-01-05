@@ -353,14 +353,14 @@ public class RezerwacjaView implements IRezerwacjaView {
 					wyswietlWspollokatorzyButton(selectedReservation, true);
 				}
 			});
+		}else {
+			wspollokatorzyButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					wyswietlWspollokatorzyButton(selectedReservation, false);
+				}
+			});
 		}
-
-		wspollokatorzyButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				wyswietlWspollokatorzyButton(selectedReservation, false);
-			}
-		});
 
 		dodajPlatnoscButton.addActionListener(new ActionListener() {
 			@Override
