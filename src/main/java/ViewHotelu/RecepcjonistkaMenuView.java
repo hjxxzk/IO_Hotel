@@ -21,13 +21,18 @@ public class RecepcjonistkaMenuView implements IMenuView {
 	Logowanie logowanie = new Logowanie();
 	HotelFasada hotel;
 	RezerwacjaView rezerwacja = new RezerwacjaView();
+	JList<String> guestList;
 
 	public RecepcjonistkaMenuView(HotelFasada hotel) {
 		this.hotel = hotel;
 	}
 
 	public void wyswietlCodziennychGosci() {
-		// TODO - implement RecepcjonistkaMenuView.wyswietlCodziennychGosci
+		List<Rezerwacja> dzisiejsiGoscie = hotel.displayTodaysGuests();
+		// Aktualizuj JList
+		guestList.setListData(dzisiejsiGoscie.stream()
+				.map(this::dzisiejszyGoscToString)
+				.toArray(String[]::new));
 	}
 
 	public void wyswietl() {
@@ -148,7 +153,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		panel.add(guestsLabel);
 
 		List<Rezerwacja> dzisiejsiGoscie = hotel.displayTodaysGuests();
-		JList<String> guestList = new JList<>(dzisiejsiGoscie.stream()
+		guestList = new JList<>(dzisiejsiGoscie.stream()
 				.map(this::dzisiejszyGoscToString)
 				.toArray(String[]::new));
 		JScrollPane guestScrollPane = new JScrollPane(guestList);
@@ -210,6 +215,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				if (selectedIndex != -1) {
 					Rezerwacja rezerwacjaDoZameldowania = dzisiejsiGoscie.get(selectedIndex);
 					hotel.checkInGuests(rezerwacjaDoZameldowania.getNumerRezerwacji());
+					wyswietlCodziennychGosci();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
@@ -223,6 +229,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				if (selectedIndex != -1) {
 					Rezerwacja rezerwacjaDoZameldowania = dzisiejsiGoscie.get(selectedIndex);
 					hotel.checkOutGuests(rezerwacjaDoZameldowania.getNumerRezerwacji());
+					wyswietlCodziennychGosci();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
