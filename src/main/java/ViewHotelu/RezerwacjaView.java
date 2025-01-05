@@ -343,7 +343,8 @@ public class RezerwacjaView implements IRezerwacjaView {
 		wspollokatorzyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				wyswietlWspollokatorzyButton();
+                assert selectedReservation != null;
+                wyswietlWspollokatorzyButton(selectedReservation);
 			}
 		});
 
@@ -417,7 +418,7 @@ public class RezerwacjaView implements IRezerwacjaView {
 		frame.setVisible(true);
 	}
 
-	public void wyswietlWspollokatorzyButton() {
+	public void wyswietlWspollokatorzyButton(Rezerwacja selectedReservation) {
 		// Tworzenie głównego okna
 		JFrame frame = new JFrame("Współlokatorzy");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -435,29 +436,23 @@ public class RezerwacjaView implements IRezerwacjaView {
 		tytulLabel.setFont(new Font("Arial", Font.BOLD, 18));
 		frame.add(tytulLabel);
 
-		// Etykieta "Imię i nazwisko" nad polem tekstowym
-		JLabel imieNazwiskoLabel = new JLabel("Imię i nazwisko:");
-		imieNazwiskoLabel.setBounds(100, 50, 200, 25);
-		frame.add(imieNazwiskoLabel);
-
-		JTextField imieNazwiskoField = new JTextField();
-		imieNazwiskoField.setBounds(50, 80, 200, 25);
-		frame.add(imieNazwiskoField);
-
-		// Etykieta "Adres Email" nad polem tekstowym
-		JLabel adresEmailLabel = new JLabel("Adres Email:");
-		adresEmailLabel.setBounds(350, 50, 200, 25);
-		frame.add(adresEmailLabel);
-
-		JTextField adresEmailField = new JTextField();
-		adresEmailField.setBounds(300, 80, 200, 25);
-		frame.add(adresEmailField);
-
 		// Pole tekstowe do wyświetlania listy współlokatorów
 		JTextArea listaWspollokatorow = new JTextArea();
-		listaWspollokatorow.setBounds(50, 130, 480, 150); // Większe pole tekstowe
+		listaWspollokatorow.setBounds(50, 50, 480, 200); // Większe pole tekstowe
 		listaWspollokatorow.setEditable(false);
 		frame.add(listaWspollokatorow);
+
+		// Pobranie listy współlokatorów z selectedReservation
+		if (selectedReservation.getGosc().getWspollokatorzy() != null && !selectedReservation.getGosc().getWspollokatorzy().isEmpty()) {
+			StringBuilder szczegoly = new StringBuilder();
+			for (Gosc wspollokator : selectedReservation.getGosc().getWspollokatorzy()) {
+				szczegoly.append("Imię i nazwisko: ").append(wspollokator.getImieNazwisko()).append("\n");
+				szczegoly.append("Adres e-mail: ").append(wspollokator.getAdresEmail()).append("\n");
+			}
+			listaWspollokatorow.setText(szczegoly.toString());
+		} else {
+			listaWspollokatorow.setText("Brak współlokatorów.");
+		}
 
 		// Przycisk "Dodaj"
 		JButton dodajButton = new JButton("Dodaj");
