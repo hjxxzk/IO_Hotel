@@ -2,12 +2,14 @@ package ModelHotelu;
 
 import InterfejsHotelu.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Rezerwacja implements IRezerwacja {
 
 	private String dataRezerwacji;

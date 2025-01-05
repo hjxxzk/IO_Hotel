@@ -6,11 +6,17 @@ import ModelHotelu.Rezerwacja;
 import ModelHotelu.Termin;
 import PrezenterHotelu.Logowanie;
 import PrezenterHotelu.RecepcjonistkaSingleton;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -178,8 +184,21 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		logoutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					// Zapisz dane rezerwacji do pliku JSON przed wylogowaniem
+					zapiszRezerwacjeDoJSON("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json", hotel.getRezerwacje());
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(frame, "Błąd podczas zapisywania danych do pliku JSON.", "Błąd", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
 				pokazOkienkoWylogowania(logowanie.getObecnieZalogowanaRecepcjonistka().getImie());
 				frame.dispose();
+			}
+			private void zapiszRezerwacjeDoJSON(String nazwaPliku, List<Rezerwacja> rezerwacje) throws IOException {
+				ObjectMapper objectMapper = new ObjectMapper();
+				objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Ładniejsze formatowanie JSON
+
+				objectMapper.writeValue(new File(nazwaPliku), rezerwacje);
 			}
 		});
 
