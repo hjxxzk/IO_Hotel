@@ -6,12 +6,14 @@ import ModelHotelu.Termin;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RezerwacjaView implements IRezerwacjaView {
 
 	public void wyswietlListeRezerwacji() {
 		// TODO - implement RezerwacjaView.wyswietlListeRezerwacji
-		//throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -139,6 +141,244 @@ public class RezerwacjaView implements IRezerwacjaView {
 			return rezerwacja.getGosc().getClass().getSimpleName();
 		}
 		return null;
+	}
+
+	public void zapisDanychRezerwacjiView(){
+		// Tworzenie głównego okna
+		JFrame frame = new JFrame("Edytuj Rezerwację");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(900, 750); // Zwiększono wysokość, aby uwzględnić większy panel
+		frame.setLayout(null); // Użycie null layout dla pełnej kontroli nad rozmieszczeniem
+
+		// Kolor tła
+		Color tloKolor = new Color(255, 182, 156); // Odpowiada kolorowi na zdjęciu
+		frame.getContentPane().setBackground(tloKolor); // Ustawienie koloru tła ramki
+
+		// Panel "Dane Rezerwacji"
+		JPanel daneRezerwacjiPanel = new JPanel();
+		daneRezerwacjiPanel.setBounds(20, 20, 400, 350); // Zwiększono wysokość panelu
+		daneRezerwacjiPanel.setBackground(tloKolor); // Ustawienie tła panelu
+		daneRezerwacjiPanel.setBorder(BorderFactory.createTitledBorder("Dane Rezerwacji"));
+		daneRezerwacjiPanel.setLayout(null);
+
+		// Elementy "Dane Rezerwacji" z większym odstępem
+		JLabel imieNazwiskoLabel = new JLabel("Imię i nazwisko:");
+		imieNazwiskoLabel.setBounds(20, 30, 120, 25);
+		JTextField imieNazwiskoField = new JTextField();
+		imieNazwiskoField.setBounds(160, 30, 200, 25); // Większy odstęp w poziomie
+
+		JLabel numerTelefonuLabel = new JLabel("Numer telefonu:");
+		numerTelefonuLabel.setBounds(20, 70, 120, 25);
+		JTextField numerTelefonuField = new JTextField();
+		numerTelefonuField.setBounds(160, 70, 200, 25);
+
+		JLabel adresEmailLabel = new JLabel("Adres Email:");
+		adresEmailLabel.setBounds(20, 110, 120, 25);
+		JTextField adresEmailField = new JTextField();
+		adresEmailField.setBounds(160, 110, 200, 25);
+
+		JLabel iloscDoroslychLabel = new JLabel("Ilość dorosłych:");
+		iloscDoroslychLabel.setBounds(20, 150, 120, 25);
+		JTextField iloscDoroslychField = new JTextField();
+		iloscDoroslychField.setBounds(160, 150, 200, 25);
+
+		JLabel iloscDzieciLabel = new JLabel("Ilość dzieci:");
+		iloscDzieciLabel.setBounds(20, 190, 120, 25);
+		JTextField iloscDzieciField = new JTextField();
+		iloscDzieciField.setBounds(160, 190, 200, 25);
+
+		JLabel godzinaPrzyjazduLabel = new JLabel("Godzina przyjazdu:");
+		godzinaPrzyjazduLabel.setBounds(20, 230, 120, 25);
+		JTextField godzinaPrzyjazduField = new JTextField();
+		godzinaPrzyjazduField.setBounds(160, 230, 200, 25);
+
+		JLabel specjalneZyczeniaLabel = new JLabel("Specjalne życzenia:");
+		specjalneZyczeniaLabel.setBounds(20, 270, 130, 25);
+		JTextField specjalneZyczeniaField = new JTextField();
+		specjalneZyczeniaField.setBounds(160, 270, 200, 25);
+
+		JCheckBox czyDlaInnejOsobyCheckBox = new JCheckBox("Czy to rezerwacja dla innej osoby?");
+		czyDlaInnejOsobyCheckBox.setBounds(20, 310, 300, 25);
+		czyDlaInnejOsobyCheckBox.setBackground(tloKolor); // Ustawienie tła checkboxa na kolor panelu
+
+		// Dodanie elementów do panelu "Dane Rezerwacji"
+		daneRezerwacjiPanel.add(imieNazwiskoLabel);
+		daneRezerwacjiPanel.add(imieNazwiskoField);
+		daneRezerwacjiPanel.add(numerTelefonuLabel);
+		daneRezerwacjiPanel.add(numerTelefonuField);
+		daneRezerwacjiPanel.add(adresEmailLabel);
+		daneRezerwacjiPanel.add(adresEmailField);
+		daneRezerwacjiPanel.add(iloscDoroslychLabel);
+		daneRezerwacjiPanel.add(iloscDoroslychField);
+		daneRezerwacjiPanel.add(iloscDzieciLabel);
+		daneRezerwacjiPanel.add(iloscDzieciField);
+		daneRezerwacjiPanel.add(godzinaPrzyjazduLabel);
+		daneRezerwacjiPanel.add(godzinaPrzyjazduField);
+		daneRezerwacjiPanel.add(specjalneZyczeniaLabel);
+		daneRezerwacjiPanel.add(specjalneZyczeniaField);
+		daneRezerwacjiPanel.add(czyDlaInnejOsobyCheckBox);
+
+		// Panel "Rezerwacja służbowa"
+		JPanel rezerwacjaSluzbowaPanel = new JPanel();
+		rezerwacjaSluzbowaPanel.setBounds(450, 20, 400, 350);
+		rezerwacjaSluzbowaPanel.setBackground(tloKolor);
+		rezerwacjaSluzbowaPanel.setBorder(BorderFactory.createTitledBorder("Rezerwacja służbowa"));
+		rezerwacjaSluzbowaPanel.setLayout(null);
+
+		JLabel nazwaFirmyLabel = new JLabel("Nazwa firmy:");
+		nazwaFirmyLabel.setBounds(20, 30, 120, 25);
+		JTextField nazwaFirmyField = new JTextField();
+		nazwaFirmyField.setBounds(160, 30, 200, 25);
+
+		JLabel numerVATLabel = new JLabel("Numer VAT:");
+		numerVATLabel.setBounds(20, 70, 120, 25);
+		JTextField numerVATField = new JTextField();
+		numerVATField.setBounds(160, 70, 200, 25);
+
+		JLabel numerNIPLabel = new JLabel("Numer NIP:");
+		numerNIPLabel.setBounds(20, 110, 120, 25);
+		JTextField numerNIPField = new JTextField();
+		numerNIPField.setBounds(160, 110, 200, 25);
+
+		JButton wspollokatorzyButton = new JButton("Współlokatorzy");
+		wspollokatorzyButton.setBounds(125, 170, 150, 30);
+
+		JButton dodajPlatnoscButton = new JButton("Dodaj płatność");
+		dodajPlatnoscButton.setBounds(125, 210, 150, 30);
+
+		JButton zapiszButton = new JButton("Zapisz");
+		zapiszButton.setBounds(125, 250, 150, 30);
+
+		rezerwacjaSluzbowaPanel.add(nazwaFirmyLabel);
+		rezerwacjaSluzbowaPanel.add(nazwaFirmyField);
+		rezerwacjaSluzbowaPanel.add(numerVATLabel);
+		rezerwacjaSluzbowaPanel.add(numerVATField);
+		rezerwacjaSluzbowaPanel.add(numerNIPLabel);
+		rezerwacjaSluzbowaPanel.add(numerNIPField);
+		rezerwacjaSluzbowaPanel.add(wspollokatorzyButton);
+		rezerwacjaSluzbowaPanel.add(dodajPlatnoscButton);
+		rezerwacjaSluzbowaPanel.add(zapiszButton);
+
+		// Panel "Adres zamieszkania"
+		JPanel adresZamieszkaniaPanel = new JPanel();
+		adresZamieszkaniaPanel.setBounds(20, 400, 830, 150);
+		adresZamieszkaniaPanel.setBackground(tloKolor);
+		adresZamieszkaniaPanel.setBorder(BorderFactory.createTitledBorder("Adres zamieszkania"));
+		adresZamieszkaniaPanel.setLayout(null);
+
+		JLabel ulicaLabel = new JLabel("Ulica:");
+		ulicaLabel.setBounds(20, 30, 120, 25);
+		JTextField ulicaField = new JTextField();
+		ulicaField.setBounds(160, 30, 200, 25);
+
+		JLabel numerDomuLabel = new JLabel("Numer domu:");
+		numerDomuLabel.setBounds(20, 70, 120, 25);
+		JTextField numerDomuField = new JTextField();
+		numerDomuField.setBounds(160, 70, 200, 25);
+
+		JLabel numerMieszkaniaLabel = new JLabel("Numer mieszkania:");
+		numerMieszkaniaLabel.setBounds(400, 30, 150, 25);
+		JTextField numerMieszkaniaField = new JTextField();
+		numerMieszkaniaField.setBounds(550, 30, 200, 25);
+
+		JLabel miejscowoscLabel = new JLabel("Miejscowość:");
+		miejscowoscLabel.setBounds(400, 70, 120, 25);
+		JTextField miejscowoscField = new JTextField();
+		miejscowoscField.setBounds(550, 70, 200, 25);
+
+		JLabel kodPocztowyLabel = new JLabel("Kod pocztowy:");
+		kodPocztowyLabel.setBounds(20, 110, 120, 25);
+		JTextField kodPocztowyField = new JTextField();
+		kodPocztowyField.setBounds(160, 110, 200, 25);
+
+		JLabel krajLabel = new JLabel("Kraj:");
+		krajLabel.setBounds(400, 110, 120, 25);
+		JTextField krajField = new JTextField();
+		krajField.setBounds(550, 110, 200, 25);
+
+		adresZamieszkaniaPanel.add(ulicaLabel);
+		adresZamieszkaniaPanel.add(ulicaField);
+		adresZamieszkaniaPanel.add(numerDomuLabel);
+		adresZamieszkaniaPanel.add(numerDomuField);
+		adresZamieszkaniaPanel.add(numerMieszkaniaLabel);
+		adresZamieszkaniaPanel.add(numerMieszkaniaField);
+		adresZamieszkaniaPanel.add(miejscowoscLabel);
+		adresZamieszkaniaPanel.add(miejscowoscField);
+		adresZamieszkaniaPanel.add(kodPocztowyLabel);
+		adresZamieszkaniaPanel.add(kodPocztowyField);
+		adresZamieszkaniaPanel.add(krajLabel);
+		adresZamieszkaniaPanel.add(krajField);
+
+		// Dodanie paneli do ramki
+		frame.add(daneRezerwacjiPanel);
+		frame.add(rezerwacjaSluzbowaPanel);
+		frame.add(adresZamieszkaniaPanel);
+
+		// Wyświetlenie okna
+		frame.setVisible(true);
+
+		wspollokatorzyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				wyswietlWspollokatorzyButton();
+			}
+		});
+	}
+
+	public void wyswietlWspollokatorzyButton() {
+		// Tworzenie głównego okna
+		JFrame frame = new JFrame("Współlokatorzy");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setSize(600, 400); // Rozszerzone okno
+		frame.setLayout(null);
+
+		// Kolor tła
+		Color tloKolor = new Color(255, 182, 156); // Odpowiada kolorowi na zdjęciu
+		frame.getContentPane().setBackground(tloKolor);
+
+		// Etykieta tytułowa
+		JLabel tytulLabel = new JLabel("Edytuj współlokatorów:");
+		tytulLabel.setBounds(200, 10, 220, 25); // Pozycjonowanie
+		tytulLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tytulLabel.setFont(new Font("Arial", Font.BOLD, 18));
+		frame.add(tytulLabel);
+
+		// Etykieta "Imię i nazwisko" nad polem tekstowym
+		JLabel imieNazwiskoLabel = new JLabel("Imię i nazwisko:");
+		imieNazwiskoLabel.setBounds(100, 50, 200, 25);
+		frame.add(imieNazwiskoLabel);
+
+		JTextField imieNazwiskoField = new JTextField();
+		imieNazwiskoField.setBounds(50, 80, 200, 25);
+		frame.add(imieNazwiskoField);
+
+		// Etykieta "Adres Email" nad polem tekstowym
+		JLabel adresEmailLabel = new JLabel("Adres Email:");
+		adresEmailLabel.setBounds(350, 50, 200, 25);
+		frame.add(adresEmailLabel);
+
+		JTextField adresEmailField = new JTextField();
+		adresEmailField.setBounds(300, 80, 200, 25);
+		frame.add(adresEmailField);
+
+		// Pole tekstowe do wyświetlania listy współlokatorów
+		JTextArea listaWspollokatorow = new JTextArea();
+		listaWspollokatorow.setBounds(50, 130, 480, 150); // Większe pole tekstowe
+		listaWspollokatorow.setEditable(false);
+		frame.add(listaWspollokatorow);
+
+		// Przycisk "Dodaj"
+		JButton dodajButton = new JButton("Dodaj");
+		dodajButton.setBounds(150, 310, 120, 30);
+		frame.add(dodajButton);
+
+		// Przycisk "Usuń"
+		JButton usunButton = new JButton("Usuń");
+		usunButton.setBounds(320, 310, 120, 30);
+		frame.add(usunButton);
+
+		// Wyświetlenie okna
+		frame.setVisible(true);
 	}
 
 }

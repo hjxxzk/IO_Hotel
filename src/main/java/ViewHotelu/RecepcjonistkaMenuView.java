@@ -198,6 +198,13 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			}
 		});
 
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rezerwacja.zapisDanychRezerwacjiView();
+			}
+		});
+
 		// Dodanie panelu do ramki i wyświetlenie
 		frame.add(panel);
 		frame.setVisible(true);
@@ -211,8 +218,6 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				" | Pokój: " + rezerwacja.getPokoj().getNumer() +
 				" | Data: " + rezerwacja.getTermin().getData_rozpoczecia_pobytu() + " - " + rezerwacja.getTermin().getData_zakonczenia_pobytu();
 	}
-
-	//TODO rezerwacja
 
 
 	public void pokazOkienkoWylogowania(String imieRecepcjonistki) {
