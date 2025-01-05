@@ -18,6 +18,7 @@ public class AdresZamieszkania {
 			@JsonProperty("miejscowosc") String miejscowosc,
 			@JsonProperty("ulica") String ulica,
 			@JsonProperty("numerDomu") String numerDomu,
+			@JsonProperty("numerMieszkania") int numerMieszkania,
 			@JsonProperty("kodPocztowy") String kodPocztowy,
 			@JsonProperty("kraj") String kraj
 	) {

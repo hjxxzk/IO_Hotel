@@ -18,7 +18,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 
 	Logowanie logowanie = new Logowanie();
 	HotelFasada hotel;
-	RezerwacjaView rezerwacja = new RezerwacjaView();
+	RezerwacjaView rezerwacja = new RezerwacjaView(hotel);
 
 	public RecepcjonistkaMenuView(HotelFasada hotel) {
 		this.hotel = hotel;
@@ -214,6 +214,31 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				} else {
 					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
+			}
+		});
+
+		deleteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = reservationList.getSelectedIndex();
+				System.out.println(selectedIndex);
+				if (selectedIndex != -1) {
+					String numerRezerwacjiDoUsunięcia = String.valueOf(selectedIndex);
+					System.out.println(numerRezerwacjiDoUsunięcia);
+					hotel.deleteReservation(numerRezerwacjiDoUsunięcia);
+					reservationList.setListData(hotel.getRezerwacje().stream()
+							.map(this::rezerwacjaToString)  // Odwołanie się bezpośrednio do metody `rezerwacjaToString` w tej samej klasie
+							.toArray(String[]::new));
+
+				} else {
+					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			private String rezerwacjaToString(Rezerwacja rezerwacja) {
+				return "Rezerwacja nr " + rezerwacja.getNumerRezerwacji() +
+						" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
+						" | Pokój: " + rezerwacja.getPokoj().getNumer() +
+						" | Data: " + rezerwacja.getTermin().getData_rozpoczecia_pobytu() + " - " + rezerwacja.getTermin().getData_zakonczenia_pobytu();
 			}
 		});
 
