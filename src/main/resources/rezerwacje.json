@@ -13,7 +13,7 @@
       "dataPlatnosci": "2025-01-04",
       "dataPrzedplaty": "2025-01-04"
     },
-    "godzinaPrzyjazdu": "2025-01-11T14:00:00",
+    "godzinaPrzyjazdu": "2025-01-05T14:00:00",
     "gosc": {
       "typ": "prywatny",
       "imieNazwisko": "Jan Kowalski",
@@ -45,14 +45,14 @@
       "udogodnienia": "TV, Wi-Fi, klimatyzacja",
       "terminy": [
         {
-          "od": "2025-01-11",
+          "od": "2025-01-05",
           "do": "2025-01-13"
         }
       ],
       "koszt": 250
     },
     "termin": {
-      "data_rozpoczecia_pobytu": "2025-01-11",
+      "data_rozpoczecia_pobytu": "2025-01-05",
       "data_zakonczenia_pobytu": "2025-01-13"
     }
   },

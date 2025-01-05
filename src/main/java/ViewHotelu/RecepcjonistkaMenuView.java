@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -145,7 +147,10 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		guestsLabel.setBounds(550, 60, 200, 20);
 		panel.add(guestsLabel);
 
-		JList<String> guestList = new JList<>(new String[]{}); // TODO Pusta lista
+		List<Rezerwacja> dzisiejsiGoscie = hotel.displayTodaysGuests();
+		JList<String> guestList = new JList<>(dzisiejsiGoscie.stream()
+				.map(this::dzisiejszyGoscToString)
+				.toArray(String[]::new));
 		JScrollPane guestScrollPane = new JScrollPane(guestList);
 		guestScrollPane.setBounds(555, 90, 200, 300);
 		panel.add(guestScrollPane);
@@ -198,6 +203,32 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			}
 		});
 
+		checkInButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = guestList.getSelectedIndex(); // Pobierz indeks wybranej rezerwacji
+				if (selectedIndex != -1) {
+					Rezerwacja rezerwacjaDoZameldowania = dzisiejsiGoscie.get(selectedIndex);
+					hotel.checkInGuests(rezerwacjaDoZameldowania.getNumerRezerwacji());
+				} else {
+					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+		checkOutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = guestList.getSelectedIndex(); // Pobierz indeks wybranej rezerwacji
+				if (selectedIndex != -1) {
+					Rezerwacja rezerwacjaDoZameldowania = dzisiejsiGoscie.get(selectedIndex);
+					hotel.checkOutGuests(rezerwacjaDoZameldowania.getNumerRezerwacji());
+				} else {
+					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -217,6 +248,25 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
 				" | Pokój: " + rezerwacja.getPokoj().getNumer() +
 				" | Data: " + rezerwacja.getTermin().getData_rozpoczecia_pobytu() + " - " + rezerwacja.getTermin().getData_zakonczenia_pobytu();
+	}
+
+	public String dzisiejszyGoscToString(Rezerwacja rezerwacja) {
+
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+		LocalDateTime dateTime = LocalDateTime.parse(rezerwacja.getGodzinaPrzyjazdu(), formatter);
+		String godzina = String.valueOf(dateTime.getHour());
+
+		if(rezerwacja.isZameldowanie())	{
+			return "Wymeldowanie: rezerwacja nr " + rezerwacja.getNumerRezerwacji() +
+					" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
+					" | Pokój: " + rezerwacja.getPokoj().getNumer() +
+					" | Godzina: " + godzina;
+		} else {
+			return "Zameldowanie: rezerwacja nr " + rezerwacja.getNumerRezerwacji() +
+					" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
+					" | Pokój: " + rezerwacja.getPokoj().getNumer() +
+					" | Godzina: " + godzina;
+		}
 	}
 
 

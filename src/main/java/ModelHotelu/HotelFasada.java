@@ -102,8 +102,7 @@ public class HotelFasada implements IHotel {
 			Termin termin = rezerwacja.getTermin();
 			LocalDate startDate = LocalDate.parse(termin.getData_rozpoczecia_pobytu());
 			LocalDate endDate = LocalDate.parse(termin.getData_zakonczenia_pobytu());
-
-			if (startDate.equals(today) || endDate.equals(today)) {
+			if ((startDate.equals(today) && !rezerwacja.isZameldowanie()) || (endDate.equals(today) && !rezerwacja.isWymeldowanie())) {
 				todaysGuests.add(rezerwacja);
 			}
 		}
