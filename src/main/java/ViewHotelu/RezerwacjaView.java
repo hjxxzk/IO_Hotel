@@ -1,5 +1,6 @@
 package ViewHotelu;
 
+import ModelHotelu.FormaPlatnosci;
 import ModelHotelu.Gosc;
 import ModelHotelu.Rezerwacja;
 import ModelHotelu.Termin;
@@ -323,6 +324,65 @@ public class RezerwacjaView implements IRezerwacjaView {
 				wyswietlWspollokatorzyButton();
 			}
 		});
+
+		dodajPlatnoscButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				wyswietlDodajPlatnoscButton();
+			}
+		});
+	}
+
+	public void wyswietlDodajPlatnoscButton() {
+		// Tworzenie głównego okna
+		JFrame frame = new JFrame("Dodaj płatność");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setSize(400, 250); // Rozmiar okna
+		frame.setLayout(null);
+
+		// Kolor tła
+		Color tloKolor = new Color(255, 182, 156); // Kolor odpowiadający obrazkowi
+		frame.getContentPane().setBackground(tloKolor);
+
+		// Etykieta "Kwota do zapłacenia"
+		JLabel kwotaLabel = new JLabel("Kwota do zapłacenia: [kwota opłacona / całość]");
+		kwotaLabel.setBounds(20, 20, 350, 25); // Pozycjonowanie
+		kwotaLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		kwotaLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		frame.add(kwotaLabel);
+
+		// Etykieta "Kwota wpłacona"
+		JLabel kwotaWplaconaLabel = new JLabel("Kwota wpłacona:");
+		kwotaWplaconaLabel.setBounds(50, 70, 120, 25);
+		frame.add(kwotaWplaconaLabel);
+
+		// Pole tekstowe do wpisania kwoty
+		JTextField kwotaField = new JTextField();
+		kwotaField.setBounds(50, 100, 120, 25);
+		frame.add(kwotaField);
+
+		// Etykieta "Forma"
+		JLabel formaLabel = new JLabel("Forma:");
+		formaLabel.setBounds(220, 70, 120, 25);
+		frame.add(formaLabel);
+
+		// Lista rozwijana dla formy płatności
+		JComboBox<String> formaComboBox = new JComboBox<>();
+		formaComboBox.setBounds(220, 100, 120, 25);
+		frame.add(formaComboBox);
+
+		// Dodawanie opcji z enumeracji FormaPlatnosci
+		for (FormaPlatnosci forma : FormaPlatnosci.values()) {
+			formaComboBox.addItem(forma.name());
+		}
+
+		// Przycisk "Zapisz"
+		JButton zapiszButton = new JButton("Zapisz");
+		zapiszButton.setBounds(150, 160, 100, 30);
+		frame.add(zapiszButton);
+
+		// Wyświetlenie okna
+		frame.setVisible(true);
 	}
 
 	public void wyswietlWspollokatorzyButton() {
