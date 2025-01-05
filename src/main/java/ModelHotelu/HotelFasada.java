@@ -12,6 +12,8 @@ public class HotelFasada implements IHotel {
 	private List<Pokoj> pokoje;
 	private List<Rezerwacja> rezerwacje;
 
+	private Pokoj pokojDoZarezerwowania;
+
 	public List<Pokoj> getPokoje() {
 		return this.pokoje;
 	}
@@ -26,6 +28,14 @@ public class HotelFasada implements IHotel {
 
 	public void setRezerwacje(List<Rezerwacja> rezerwacje) {
 		this.rezerwacje = rezerwacje;
+	}
+
+	public Pokoj getPokojDoZarezerwowania() {
+		return pokojDoZarezerwowania;
+	}
+
+	public void setPokojDoZarezerwowania(Pokoj pokojDoZarezerwowania) {
+		this.pokojDoZarezerwowania = pokojDoZarezerwowania;
 	}
 
 	/**

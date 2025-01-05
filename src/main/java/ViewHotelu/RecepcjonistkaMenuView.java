@@ -1,9 +1,6 @@
 package ViewHotelu;
 
-import ModelHotelu.Gosc;
-import ModelHotelu.HotelFasada;
-import ModelHotelu.Rezerwacja;
-import ModelHotelu.Termin;
+import ModelHotelu.*;
 import PrezenterHotelu.Logowanie;
 import PrezenterHotelu.RecepcjonistkaSingleton;
 
@@ -21,6 +18,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 	Logowanie logowanie = new Logowanie();
 	HotelFasada hotel;
 	RezerwacjaView rezerwacja = new RezerwacjaView();
+	PokojView pokoje = new PokojView();
 	JList<String> guestList;
 
 	public RecepcjonistkaMenuView(HotelFasada hotel) {
@@ -39,7 +37,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		JFrame frame = new JFrame("DEOnly Wonderland Hotel");
 		frame.setSize(400, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		frame.setLocationRelativeTo(null);
 		// Panel główny
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -95,7 +93,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				} else {
 					JOptionPane.showMessageDialog(frame, "Błędny login lub hasło.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
-            }
+			}
 		});
 		frame.add(panel);
 		frame.setVisible(true);
@@ -113,7 +111,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		JFrame frame = new JFrame(logowanie.getObecnieZalogowanaRecepcjonistka().getId() + " " +logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + " " + logowanie.getObecnieZalogowanaRecepcjonistka().getNazwisko());
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+		frame.setLocationRelativeTo(null);
 		// Główny panel
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -238,7 +236,8 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Rezerwacja selectedReservation = null; // Pobierz wybraną rezerwację
-				rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
+				pokoje.pokojView(hotel, rezerwacja);
+				//rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
 			}
 		});
 
@@ -294,11 +293,12 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		JFrame logoutFrame = new JFrame("Do widzenia!");
 		logoutFrame.setSize(400, 200);
 		logoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		logoutFrame.setLocationRelativeTo(null);
 
 		// Panel
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color(255, 182, 156)); // Pomarańczowe tło
+		panel.setBackground(new Color(255, 182, 156));
 
 		// Wiadomość wylogowania
 		JLabel messageLabel1 = new JLabel("Poprawnie wylogowano [" + imieRecepcjonistki + "]");
