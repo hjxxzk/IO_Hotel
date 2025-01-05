@@ -144,10 +144,10 @@ public class RezerwacjaView implements IRezerwacjaView {
 		return null;
 	}
 
-	public void zapisDanychRezerwacjiView(){
+	public void zapisDanychRezerwacjiView(Rezerwacja selectedReservation, boolean isEditMode){
 		// Tworzenie głównego okna
-		JFrame frame = new JFrame("Edytuj Rezerwację");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame(isEditMode ? "Edytuj Rezerwację" : "Dodaj Rezerwację");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(900, 750); // Zwiększono wysokość, aby uwzględnić większy panel
 		frame.setLayout(null); // Użycie null layout dla pełnej kontroli nad rozmieszczeniem
 
@@ -315,13 +315,36 @@ public class RezerwacjaView implements IRezerwacjaView {
 		frame.add(rezerwacjaSluzbowaPanel);
 		frame.add(adresZamieszkaniaPanel);
 
-		// Wyświetlenie okna
-		frame.setVisible(true);
+
+
+		if (isEditMode && selectedReservation != null) {
+			// Wypełnienie pól tekstowych danymi wybranej rezerwacji
+			imieNazwiskoField.setText(selectedReservation.getGosc().getImieNazwisko());
+			numerTelefonuField.setText(selectedReservation.getGosc().getNumerTelefonu());
+			adresEmailField.setText(selectedReservation.getGosc().getAdresEmail());
+			iloscDoroslychField.setText(String.valueOf(selectedReservation.getIloscDoroslych()));
+			iloscDzieciField.setText(String.valueOf(selectedReservation.getIloscDzieci()));
+			godzinaPrzyjazduField.setText(selectedReservation.getGodzinaPrzyjazdu());
+			specjalneZyczeniaField.setText(selectedReservation.getGosc().getSpecjalneZyczenia());
+			czyDlaInnejOsobyCheckBox.setSelected(selectedReservation.getGosc().isCzyDlaKogos());
+
+			//nazwaFirmyField.setText(selectedReservation);
+			//numerVATField.setText(selectedReservation.getNumerVAT());
+			//numerNIPField.setText(selectedReservation.getNumerNIP()); - TODO gosc prywatny bo nie dziala
+
+			ulicaField.setText(selectedReservation.getGosc().getAdresZamieszkania().getUlica());
+			numerDomuField.setText(selectedReservation.getGosc().getAdresZamieszkania().getNumerDomu());
+			numerMieszkaniaField.setText(String.valueOf(selectedReservation.getGosc().getAdresZamieszkania().getNumerMieszkania()));
+			miejscowoscField.setText(selectedReservation.getGosc().getAdresZamieszkania().getMiejscowosc());
+			kodPocztowyField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKodPocztowy());
+			krajField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKraj());
+		}
 
 		wspollokatorzyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				wyswietlWspollokatorzyButton();
+                assert selectedReservation != null;
+                wyswietlWspollokatorzyButton(selectedReservation);
 			}
 		});
 
@@ -331,6 +354,16 @@ public class RezerwacjaView implements IRezerwacjaView {
 				wyswietlDodajPlatnoscButton();
 			}
 		});
+
+		zapiszButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				// Dodaj kod zapisu danych rezerwacji
+			}
+		});
+
+		// Wyświetlenie okna
+		frame.setVisible(true);
 	}
 
 	public void wyswietlDodajPlatnoscButton() {
@@ -385,7 +418,7 @@ public class RezerwacjaView implements IRezerwacjaView {
 		frame.setVisible(true);
 	}
 
-	public void wyswietlWspollokatorzyButton() {
+	public void wyswietlWspollokatorzyButton(Rezerwacja selectedReservation) {
 		// Tworzenie głównego okna
 		JFrame frame = new JFrame("Współlokatorzy");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -403,29 +436,23 @@ public class RezerwacjaView implements IRezerwacjaView {
 		tytulLabel.setFont(new Font("Arial", Font.BOLD, 18));
 		frame.add(tytulLabel);
 
-		// Etykieta "Imię i nazwisko" nad polem tekstowym
-		JLabel imieNazwiskoLabel = new JLabel("Imię i nazwisko:");
-		imieNazwiskoLabel.setBounds(100, 50, 200, 25);
-		frame.add(imieNazwiskoLabel);
-
-		JTextField imieNazwiskoField = new JTextField();
-		imieNazwiskoField.setBounds(50, 80, 200, 25);
-		frame.add(imieNazwiskoField);
-
-		// Etykieta "Adres Email" nad polem tekstowym
-		JLabel adresEmailLabel = new JLabel("Adres Email:");
-		adresEmailLabel.setBounds(350, 50, 200, 25);
-		frame.add(adresEmailLabel);
-
-		JTextField adresEmailField = new JTextField();
-		adresEmailField.setBounds(300, 80, 200, 25);
-		frame.add(adresEmailField);
-
 		// Pole tekstowe do wyświetlania listy współlokatorów
 		JTextArea listaWspollokatorow = new JTextArea();
-		listaWspollokatorow.setBounds(50, 130, 480, 150); // Większe pole tekstowe
+		listaWspollokatorow.setBounds(50, 50, 480, 200); // Większe pole tekstowe
 		listaWspollokatorow.setEditable(false);
 		frame.add(listaWspollokatorow);
+
+		// Pobranie listy współlokatorów z selectedReservation
+		if (selectedReservation.getGosc().getWspollokatorzy() != null && !selectedReservation.getGosc().getWspollokatorzy().isEmpty()) {
+			StringBuilder szczegoly = new StringBuilder();
+			for (Gosc wspollokator : selectedReservation.getGosc().getWspollokatorzy()) {
+				szczegoly.append("Imię i nazwisko: ").append(wspollokator.getImieNazwisko()).append("\n");
+				szczegoly.append("Adres e-mail: ").append(wspollokator.getAdresEmail()).append("\n");
+			}
+			listaWspollokatorow.setText(szczegoly.toString());
+		} else {
+			listaWspollokatorow.setText("Brak współlokatorów.");
+		}
 
 		// Przycisk "Dodaj"
 		JButton dodajButton = new JButton("Dodaj");

@@ -112,7 +112,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		// Główne okno
 		JFrame frame = new JFrame(logowanie.getObecnieZalogowanaRecepcjonistka().getId() + " " +logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + " " + logowanie.getObecnieZalogowanaRecepcjonistka().getNazwisko());
 		frame.setSize(800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Główny panel
 		JPanel panel = new JPanel();
@@ -135,7 +135,6 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		reservationLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		reservationLabel.setBounds(20, 60, 200, 20);
 		panel.add(reservationLabel);
-
 
 		List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
 		JList<String> reservationList = new JList<>(rezerwacje.stream()
@@ -190,7 +189,6 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				pokazOkienkoWylogowania(logowanie.getObecnieZalogowanaRecepcjonistka().getImie());
-				//JOptionPane.showMessageDialog(frame, "Wylogowano!");
 				frame.dispose();
 			}
 		});
@@ -239,7 +237,24 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				rezerwacja.zapisDanychRezerwacjiView();
+				int selectedIndex = reservationList.getSelectedIndex();
+				if (selectedIndex == -1) {
+					Rezerwacja selectedReservation = null; // Pobierz wybraną rezerwację
+					rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
+				}
+			}
+		});
+
+		editButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				int selectedIndex = reservationList.getSelectedIndex(); // Pobierz indeks wybranej rezerwacji
+				if (selectedIndex != -1) {
+					Rezerwacja selectedReservation = rezerwacje.get(selectedIndex); // Pobierz wybraną rezerwację
+					rezerwacja.zapisDanychRezerwacjiView(selectedReservation, true); // Wywołaj metodę z danymi wybranej rezerwacji
+				} else {
+					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
