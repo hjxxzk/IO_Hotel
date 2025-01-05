@@ -1,16 +1,24 @@
 package ViewHotelu;
 
-import ModelHotelu.FormaPlatnosci;
-import ModelHotelu.Gosc;
-import ModelHotelu.Rezerwacja;
-import ModelHotelu.Termin;
+import ModelHotelu.*;
+import com.google.gson.Gson;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public class RezerwacjaView implements IRezerwacjaView {
+
+	HotelFasada hotel;
+
+	public RezerwacjaView(HotelFasada hotel) {
+		this.hotel = hotel;
+	}
 
 	public void wyswietlListeRezerwacji() {
 		// TODO - implement RezerwacjaView.wyswietlListeRezerwacji
@@ -345,14 +353,14 @@ public class RezerwacjaView implements IRezerwacjaView {
 					wyswietlWspollokatorzyButton(selectedReservation, true);
 				}
 			});
+		}else {
+			wspollokatorzyButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					wyswietlWspollokatorzyButton(selectedReservation, false);
+				}
+			});
 		}
-
-		wspollokatorzyButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				wyswietlWspollokatorzyButton(selectedReservation, false);
-			}
-		});
 
 		dodajPlatnoscButton.addActionListener(new ActionListener() {
 			@Override
@@ -364,12 +372,67 @@ public class RezerwacjaView implements IRezerwacjaView {
 		zapiszButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				// Dodaj kod zapisu danych rezerwacji
+				// Pobranie danych z pól tekstowych
+				String imieNazwisko = imieNazwiskoField.getText();
+				String numerTelefonu = numerTelefonuField.getText();
+				String adresEmail = adresEmailField.getText();
+				int iloscDoroslych = Integer.parseInt(iloscDoroslychField.getText());
+				int iloscDzieci = Integer.parseInt(iloscDzieciField.getText());
+				String godzinaPrzyjazdu = godzinaPrzyjazduField.getText();
+				String specjalneZyczenia = specjalneZyczeniaField.getText();
+				boolean czyDlaInnejOsoby = czyDlaInnejOsobyCheckBox.isSelected();
+
+				String nazwaFirmy = nazwaFirmyField.getText();
+				int numerVat = 0;
+				int numerNip = 0;
+
+				// Pobranie adresu zamieszkania
+				String ulica = ulicaField.getText();
+				String numerDomu = numerDomuField.getText();
+				int numerMieszkania = Integer.parseInt(numerMieszkaniaField.getText());
+				String miejscowosc = miejscowoscField.getText();
+				String kodPocztowy = kodPocztowyField.getText();
+				String kraj = krajField.getText();
+
+				// Utworzenie obiektu AdresZamieszkania
+				AdresZamieszkania adresZamieszkania = new AdresZamieszkania(miejscowosc, ulica, numerDomu, numerMieszkania,kodPocztowy, kraj);
+
+				// Utworzenie obiektu Gosc
+				Gosc gosc;
+				if (nazwaFirmy != null) {
+					gosc = new GoscSluzbowy(nazwaFirmy, numerVat, numerNip, imieNazwisko, numerTelefonu, adresEmail, czyDlaInnejOsoby, specjalneZyczenia, adresZamieszkania);
+				} else {
+					gosc = new GoscPrywatny(imieNazwisko, numerTelefonu, adresEmail, czyDlaInnejOsoby, specjalneZyczenia, adresZamieszkania);
+				}
+
+				// Utworzenie obiektu Termin
+				String dataRozpoczecia = null;
+				String dataZakonczenia = null;
+				Termin nowyTermin = new Termin(dataRozpoczecia, dataZakonczenia);
+
+				// Utworzenie obiektu Rezerwacja
+				Rezerwacja nowaRezerwacja = new Rezerwacja(iloscDoroslych, iloscDzieci, null, godzinaPrzyjazdu, gosc, null, nowyTermin); //TODO na pierwszym null jest platnosc a na drugim jest pokoj
+
+				// Zapisanie nowej rezerwacji do pliku/ bazy danych lub JSON
+				zapiszDaneDoJson(nowaRezerwacja);
 			}
 		});
 
+
+
 		// Wyświetlenie okna
 		frame.setVisible(true);
+	}
+
+	private void zapiszDaneDoJson(Rezerwacja rezerwacja) {
+		try {
+			List<Rezerwacja> rezerwacjaList = hotel.getRezerwacje();
+			rezerwacjaList.add(rezerwacja);
+			hotel.setRezerwacje(rezerwacjaList);
+			JOptionPane.showMessageDialog(null, "Rezerwacja zapisana pomyślnie.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void wyswietlDodajPlatnoscButton() {

@@ -1,8 +1,13 @@
 package ViewHotelu;
 
-import ModelHotelu.*;
+import ModelHotelu.Gosc;
+import ModelHotelu.HotelFasada;
+import ModelHotelu.Rezerwacja;
+import ModelHotelu.Termin;
 import PrezenterHotelu.Logowanie;
 import PrezenterHotelu.RecepcjonistkaSingleton;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +29,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 	RezerwacjaView rezerwacja = new RezerwacjaView();
 	PokojView pokoje = new PokojView();
 	JList<String> guestList;
+	RezerwacjaView rezerwacja = new RezerwacjaView(hotel);
 
 	public RecepcjonistkaMenuView(HotelFasada hotel) {
 		this.hotel = hotel;
@@ -37,7 +47,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		JFrame frame = new JFrame("DEOnly Wonderland Hotel");
 		frame.setSize(400, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+
 		// Panel główny
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -93,7 +103,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				} else {
 					JOptionPane.showMessageDialog(frame, "Błędny login lub hasło.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
-			}
+            }
 		});
 		frame.add(panel);
 		frame.setVisible(true);
@@ -111,7 +121,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		JFrame frame = new JFrame(logowanie.getObecnieZalogowanaRecepcjonistka().getId() + " " +logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + " " + logowanie.getObecnieZalogowanaRecepcjonistka().getNazwisko());
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+
 		// Główny panel
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -186,8 +196,21 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		logoutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					// Zapisz dane rezerwacji do pliku JSON przed wylogowaniem
+					zapiszRezerwacjeDoJSON("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json", hotel.getRezerwacje());
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(frame, "Błąd podczas zapisywania danych do pliku JSON.", "Błąd", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
 				pokazOkienkoWylogowania(logowanie.getObecnieZalogowanaRecepcjonistka().getImie());
 				frame.dispose();
+			}
+			private void zapiszRezerwacjeDoJSON(String nazwaPliku, List<Rezerwacja> rezerwacje) throws IOException {
+				ObjectMapper objectMapper = new ObjectMapper();
+				objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Ładniejsze formatowanie JSON
+
+				objectMapper.writeValue(new File(nazwaPliku), rezerwacje);
 			}
 		});
 
@@ -251,6 +274,26 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				} else {
 					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
+			}
+		});
+
+		deleteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = reservationList.getSelectedIndex();
+				if (selectedIndex != -1) {
+					String numerRezerwacjiDoUsunięcia = rezerwacje.get(selectedIndex).getNumerRezerwacji();
+					hotel.deleteReservation(numerRezerwacjiDoUsunięcia);
+					reservationList.setListData(hotel.getRezerwacje().stream()
+							.map(this::rezerwacjaToString)
+							.toArray(String[]::new));
+				}
+			}
+			private String rezerwacjaToString(Rezerwacja rezerwacja) {
+				return "Rezerwacja nr " + rezerwacja.getNumerRezerwacji() +
+						" | Gość: " + rezerwacja.getGosc().getImieNazwisko() +
+						" | Pokój: " + rezerwacja.getPokoj().getNumer() +
+						" | Data: " + rezerwacja.getTermin().getData_rozpoczecia_pobytu() + " - " + rezerwacja.getTermin().getData_zakonczenia_pobytu();
 			}
 		});
 
