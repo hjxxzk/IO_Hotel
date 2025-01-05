@@ -144,9 +144,9 @@ public class RezerwacjaView implements IRezerwacjaView {
 		return null;
 	}
 
-	public void zapisDanychRezerwacjiView(Rezerwacja selectedReservation){
+	public void zapisDanychRezerwacjiView(Rezerwacja selectedReservation, boolean isEditMode){
 		// Tworzenie głównego okna
-		JFrame frame = new JFrame("Edytuj Rezerwację");
+		JFrame frame = new JFrame(isEditMode ? "Edytuj Rezerwację" : "Dodaj Rezerwację");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(900, 750); // Zwiększono wysokość, aby uwzględnić większy panel
 		frame.setLayout(null); // Użycie null layout dla pełnej kontroli nad rozmieszczeniem
@@ -318,26 +318,28 @@ public class RezerwacjaView implements IRezerwacjaView {
 		// Wyświetlenie okna
 		frame.setVisible(true);
 
-		// Wypełnienie pól tekstowych danymi wybranej rezerwacji
-		imieNazwiskoField.setText(selectedReservation.getGosc().getImieNazwisko());
-		numerTelefonuField.setText(selectedReservation.getGosc().getNumerTelefonu());
-		adresEmailField.setText(selectedReservation.getGosc().getAdresEmail());
-		iloscDoroslychField.setText(String.valueOf(selectedReservation.getIloscDoroslych()));
-		iloscDzieciField.setText(String.valueOf(selectedReservation.getIloscDzieci()));
-		godzinaPrzyjazduField.setText(selectedReservation.getGodzinaPrzyjazdu());
-		specjalneZyczeniaField.setText(selectedReservation.getGosc().getSpecjalneZyczenia());
-		czyDlaInnejOsobyCheckBox.setSelected(selectedReservation.getGosc().isCzyDlaKogos());
+		if (isEditMode && selectedReservation != null) {
+			// Wypełnienie pól tekstowych danymi wybranej rezerwacji
+			imieNazwiskoField.setText(selectedReservation.getGosc().getImieNazwisko());
+			numerTelefonuField.setText(selectedReservation.getGosc().getNumerTelefonu());
+			adresEmailField.setText(selectedReservation.getGosc().getAdresEmail());
+			iloscDoroslychField.setText(String.valueOf(selectedReservation.getIloscDoroslych()));
+			iloscDzieciField.setText(String.valueOf(selectedReservation.getIloscDzieci()));
+			godzinaPrzyjazduField.setText(selectedReservation.getGodzinaPrzyjazdu());
+			specjalneZyczeniaField.setText(selectedReservation.getGosc().getSpecjalneZyczenia());
+			czyDlaInnejOsobyCheckBox.setSelected(selectedReservation.getGosc().isCzyDlaKogos());
 
-		//nazwaFirmyField.setText(selectedReservation.);
-		//numerVATField.setText(selectedReservation.getNumerVAT());
-		//numerNIPField.setText(selectedReservation.getNumerNIP()); - TODO gosc prywatny bo nie dziala
+			//nazwaFirmyField.setText(selectedReservation);
+			//numerVATField.setText(selectedReservation.getNumerVAT());
+			//numerNIPField.setText(selectedReservation.getNumerNIP()); - TODO gosc prywatny bo nie dziala
 
-		ulicaField.setText(selectedReservation.getGosc().getAdresZamieszkania().getUlica());
-		numerDomuField.setText(selectedReservation.getGosc().getAdresZamieszkania().getNumerDomu());
-		numerMieszkaniaField.setText(String.valueOf(selectedReservation.getGosc().getAdresZamieszkania().getNumerMieszkania()));
-		miejscowoscField.setText(selectedReservation.getGosc().getAdresZamieszkania().getMiejscowosc());
-		kodPocztowyField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKodPocztowy());
-		krajField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKraj());
+			ulicaField.setText(selectedReservation.getGosc().getAdresZamieszkania().getUlica());
+			numerDomuField.setText(selectedReservation.getGosc().getAdresZamieszkania().getNumerDomu());
+			numerMieszkaniaField.setText(String.valueOf(selectedReservation.getGosc().getAdresZamieszkania().getNumerMieszkania()));
+			miejscowoscField.setText(selectedReservation.getGosc().getAdresZamieszkania().getMiejscowosc());
+			kodPocztowyField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKodPocztowy());
+			krajField.setText(selectedReservation.getGosc().getAdresZamieszkania().getKraj());
+		}
 
 		wspollokatorzyButton.addActionListener(new ActionListener() {
 			@Override

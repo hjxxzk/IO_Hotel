@@ -201,7 +201,11 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//rezerwacja.zapisDanychRezerwacjiView();
+				int selectedIndex = reservationList.getSelectedIndex();
+				if (selectedIndex == -1) {
+					Rezerwacja selectedReservation = null; // Pobierz wybraną rezerwację
+					rezerwacja.zapisDanychRezerwacjiView(selectedReservation, false);
+				}
 			}
 		});
 
@@ -211,7 +215,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 				int selectedIndex = reservationList.getSelectedIndex(); // Pobierz indeks wybranej rezerwacji
 				if (selectedIndex != -1) {
 					Rezerwacja selectedReservation = rezerwacje.get(selectedIndex); // Pobierz wybraną rezerwację
-					rezerwacja.zapisDanychRezerwacjiView(selectedReservation); // Wywołaj metodę z danymi wybranej rezerwacji
+					rezerwacja.zapisDanychRezerwacjiView(selectedReservation, true); // Wywołaj metodę z danymi wybranej rezerwacji
 				} else {
 					JOptionPane.showMessageDialog(frame, "Proszę wybrać rezerwację z listy.", "Błąd", JOptionPane.ERROR_MESSAGE);
 				}
