@@ -147,7 +147,7 @@ public class RezerwacjaView implements IRezerwacjaView {
 	public void zapisDanychRezerwacjiView(Rezerwacja selectedReservation, boolean isEditMode){
 		// Tworzenie głównego okna
 		JFrame frame = new JFrame(isEditMode ? "Edytuj Rezerwację" : "Dodaj Rezerwację");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(900, 750); // Zwiększono wysokość, aby uwzględnić większy panel
 		frame.setLayout(null); // Użycie null layout dla pełnej kontroli nad rozmieszczeniem
 
@@ -315,8 +315,7 @@ public class RezerwacjaView implements IRezerwacjaView {
 		frame.add(rezerwacjaSluzbowaPanel);
 		frame.add(adresZamieszkaniaPanel);
 
-		// Wyświetlenie okna
-		frame.setVisible(true);
+
 
 		if (isEditMode && selectedReservation != null) {
 			// Wypełnienie pól tekstowych danymi wybranej rezerwacji
@@ -361,6 +360,9 @@ public class RezerwacjaView implements IRezerwacjaView {
 				// Dodaj kod zapisu danych rezerwacji
 			}
 		});
+
+		// Wyświetlenie okna
+		frame.setVisible(true);
 	}
 
 	public void wyswietlDodajPlatnoscButton() {

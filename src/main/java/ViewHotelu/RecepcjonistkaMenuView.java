@@ -105,7 +105,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		// Główne okno
 		JFrame frame = new JFrame(logowanie.getObecnieZalogowanaRecepcjonistka().getId() + " " +logowanie.getObecnieZalogowanaRecepcjonistka().getImie() + " " + logowanie.getObecnieZalogowanaRecepcjonistka().getNazwisko());
 		frame.setSize(800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Główny panel
 		JPanel panel = new JPanel();
@@ -128,7 +128,6 @@ public class RecepcjonistkaMenuView implements IMenuView {
 		reservationLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		reservationLabel.setBounds(20, 60, 200, 20);
 		panel.add(reservationLabel);
-
 
 		List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
 		JList<String> reservationList = new JList<>(rezerwacje.stream()
@@ -180,7 +179,6 @@ public class RecepcjonistkaMenuView implements IMenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				pokazOkienkoWylogowania(logowanie.getObecnieZalogowanaRecepcjonistka().getImie());
-				//JOptionPane.showMessageDialog(frame, "Wylogowano!");
 				frame.dispose();
 			}
 		});
