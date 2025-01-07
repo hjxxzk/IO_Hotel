@@ -2,7 +2,6 @@ package InterfejsHotelu;
 
 import ModelHotelu.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface IHotel {

@@ -15,24 +15,6 @@ import java.util.regex.Pattern;
 public class PokojView implements IPokojeView {
 
 	List<Pokoj> dostepnePokoje;
-	/**
-	 * 
-	 * @param numer_pietra
-	 */
-	public void wyswietlPietro(int numer_pietra) {
-		// TODO - implement PokojView.wyswietlPietro
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param numer_pokoju
-	 * @param numer_pietra
-	 */
-	public void wyswietlPokoj(int numer_pokoju, int numer_pietra) {
-		// TODO - implement PokojView.wyswietlPokoj
-		throw new UnsupportedOperationException();
-	}
 
 	public void pokojView(HotelFasada hotel, RezerwacjaView rezerwacjaView) {
 		JFrame frame = new JFrame("Wybierz termin");
