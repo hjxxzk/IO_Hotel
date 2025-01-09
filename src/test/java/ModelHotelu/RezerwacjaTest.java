@@ -2,8 +2,7 @@ package ModelHotelu;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RezerwacjaTest {
     HotelFasada hotel;
     @BeforeEach
@@ -35,6 +34,7 @@ class RezerwacjaTest {
     }
 
     @Test
+    @Order(1)
     void shouldGenerateReservationNumberWithCurrentDate() {
         Rezerwacja rezerwacja = new Rezerwacja(2, 0, null, "12:40", null, null, null);
         String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 10);
@@ -49,6 +49,7 @@ class RezerwacjaTest {
             "3, 7, null, 10:11, null, null, null",
             "1, 0, null, 15:52, null, null, null"
     }, nullValues = {"null"})
+    @Order(3)
     void shouldGenerateReservationNumberWithCurrentDateForDifferentReservations(int iloscDoroslych, int iloscDzieci, Platnosc platnosc, String godzinaPrzyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
         Rezerwacja rezerwacja = new Rezerwacja(iloscDoroslych, iloscDzieci, platnosc, godzinaPrzyjazdu, gosc, pokoj, termin);
         String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 10);
@@ -58,7 +59,12 @@ class RezerwacjaTest {
     }
 
     @Test
-    void checkIn() {
-
+    @Order(2)
+    void shouldCheckInGuestsFromRezerwation() {
+        List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
+        for (Rezerwacja rezerwacja : rezerwacje) {
+            rezerwacja.checkIn();
+            assertTrue(rezerwacja.isZameldowanie());
+        }
     }
 }
