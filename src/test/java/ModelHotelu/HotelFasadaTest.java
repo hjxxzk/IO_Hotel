@@ -8,4 +8,8 @@ class HotelFasadaTest {
     void makeReservation() {
 
     }
+
+    void shouldDeleteReservation() {
+
+    }
 }

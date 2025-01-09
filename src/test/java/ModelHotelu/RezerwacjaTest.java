@@ -59,7 +59,7 @@ class RezerwacjaTest {
 
     @Test
     @Order(2)
-    void shouldCheckInGuestsFromRezerwation() {
+    void shouldCheckInGReservation() {
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
         for (Rezerwacja rezerwacja : rezerwacje) {
             rezerwacja.checkIn();
