@@ -1,228 +1,233 @@
-[
-  {
-    "dataRezerwacji": "2025-01-04",
-    "zameldowanie": false,
-    "wymeldowanie": false,
-    "numerRezerwacji": "1",
-    "iloscDoroslych": 2,
-    "iloscDzieci": 1,
-    "platnosc": {
-      "przedplata": 50.0,
-      "koszt": 250.0,
-      "formaPlatnosci": "KARTA",
-      "dataPlatnosci": "2025-01-04",
-      "dataPrzedplaty": "2025-01-04"
-    },
-    "godzinaPrzyjazdu": "2025-01-05T14:00:00",
-    "gosc": {
-      "typ": "prywatny",
-      "imieNazwisko": "Jan Kowalski",
-      "numerTelefonu": "+48 123 456 789",
-      "adresEmail": "jan.kowalski@example.com",
-      "czyDlaKogos": false,
-      "wspollokatorzy": [
-        {
-          "typ": "wspollokator",
-          "imieNazwisko": "Anna Kowalska",
-          "adresEmail": "anna.kowalska@example.com"
-        }
-      ],
-      "specjalneZyczenia": "Brak",
-      "adresZamieszkania": {
-        "miejscowosc": "Warszawa",
-        "ulica": "ul. Kwiatowa",
-        "numerDomu": "15",
-        "numerMieszkania": null,
-        "kodPocztowy": "00-001",
-        "kraj": "Polska"
-      }
-    },
-    "pokoj": {
-      "numer": "101",
-      "pietro": 1,
-      "liczbaGosci": 3,
-      "standard": "Deluxe",
-      "udogodnienia": "TV, Wi-Fi, klimatyzacja",
-      "terminy": [
-        {
-          "od": "2025-01-05",
-          "do": "2025-01-13"
-        }
-      ],
-      "koszt": 250
-    },
-    "termin": {
-      "data_rozpoczecia_pobytu": "2025-01-05",
-      "data_zakonczenia_pobytu": "2025-01-13"
-    }
+[ {
+  "dataRezerwacji" : "2025-01-04",
+  "zameldowanie" : false,
+  "wymeldowanie" : false,
+  "numerRezerwacji" : "1",
+  "iloscDoroslych" : 2,
+  "iloscDzieci" : 1,
+  "platnosc" : {
+    "przedplata" : 50.0,
+    "koszt" : 250.0,
+    "formaPlatnosci" : "KARTA",
+    "dataPlatnosci" : "2025-01-04",
+    "dataPrzedplaty" : "2025-01-04"
   },
-  {
-    "dataRezerwacji": "2025-01-05",
-    "zameldowanie": true,
-    "wymeldowanie": false,
-    "numerRezerwacji": 2,
-    "iloscDoroslych": 1,
-    "iloscDzieci": 0,
-    "platnosc": {
-      "przedplata": 30.0,
-      "koszt": 150.0,
-      "formaPlatnosci": "GOTOWKA",
-      "dataPlatnosci": "2025-01-05",
-      "dataPrzedplaty": "2025-01-05"
+  "godzinaPrzyjazdu" : "2025-01-11T14:00:00",
+  "gosc" : {
+    "typ" : "prywatny",
+    "imieNazwisko" : "Jan Kowalski",
+    "numerTelefonu" : "+48 123 456 789",
+    "adresEmail" : "jan.kowalski@example.com",
+    "czyDlaKogos" : false,
+    "specjalneZyczenia" : "Brak",
+    "adresZamieszkania" : {
+      "miejscowosc" : "Warszawa",
+      "ulica" : "ul. Kwiatowa",
+      "numerDomu" : "15",
+      "numerMieszkania" : 0,
+      "kodPocztowy" : "00-001",
+      "kraj" : "Polska"
     },
-    "godzinaPrzyjazdu": "2025-01-15T12:00:00",
-    "gosc": {
-      "typ": "prywatny",
-      "imieNazwisko": "Adam Nowak",
-      "numerTelefonu": "+48 987 654 321",
-      "adresEmail": "adam.nowak@example.com",
-      "czyDlaKogos": false,
-      "wspollokatorzy": [],
-      "specjalneZyczenia": "Brak",
-      "adresZamieszkania": {
-        "miejscowosc": "Kraków",
-        "ulica": "ul. Różana",
-        "numerDomu": "10",
-        "numerMieszkania": "5",
-        "kodPocztowy": "30-001",
-        "kraj": "Polska"
-      }
-    },
-    "pokoj": {
-      "numer": "202",
-      "pietro": 2,
-      "liczbaGosci": 1,
-      "standard": "Standard",
-      "udogodnienia": "TV, Wi-Fi",
-      "terminy": [
-        {
-          "od": "2025-01-15",
-          "do": "2025-01-16"
-        }
-      ],
-      "koszt": 150
-    },
-    "termin": {
-      "data_rozpoczecia_pobytu": "2025-01-15",
-      "data_zakonczenia_pobytu": "2025-01-16"
-    }
+    "wspollokatorzy" : [ {
+      "typ" : "wspollokator",
+      "imieNazwisko" : "Anna Kowalska",
+      "adresEmail" : "anna.kowalska@example.com",
+      "adresZamieszkania" : null,
+      "numerTelefonu" : null,
+      "czyDlaKogos" : false,
+      "wspollokatorzy" : null,
+      "specjalneZyczenia" : null
+    } ]
   },
-  {
-    "dataRezerwacji": "2025-01-06",
-    "zameldowanie": false,
-    "wymeldowanie": false,
-    "numerRezerwacji": 3,
-    "iloscDoroslych": 2,
-    "iloscDzieci": 2,
-    "platnosc": {
-      "przedplata": 100.0,
-      "koszt": 400.0,
-      "formaPlatnosci": "KARTA",
-      "dataPlatnosci": "2025-01-06",
-      "dataPrzedplaty": "2025-01-06"
-    },
-    "godzinaPrzyjazdu": "2025-01-20T16:00:00",
-    "gosc": {
-      "typ": "prywatny",
-      "imieNazwisko": "Katarzyna Wiśniewska",
-      "numerTelefonu": "+48 789 123 456",
-      "adresEmail": "katarzyna.wisniewska@example.com",
-      "czyDlaKogos": false,
-      "wspollokatorzy": [
-        {
-          "typ": "wspollokator",
-          "imieNazwisko": "Marek Wiśniewski",
-          "adresEmail": "marek.wisniewski@example.com"
-        },
-        {
-          "typ": "wspollokator",
-          "imieNazwisko": "Zuzanna Wiśniewska",
-          "adresEmail": "brak"
-        },
-        {
-          "typ": "wspollokator",
-          "imieNazwisko": "Jakub Wiśniewski",
-          "adresEmail": "brak"
-        }
-      ],
-      "specjalneZyczenia": "Łóżeczko dla dziecka",
-      "adresZamieszkania": {
-        "miejscowosc": "Poznań",
-        "ulica": "ul. Zielona",
-        "numerDomu": "25",
-        "numerMieszkania": "3",
-        "kodPocztowy": "60-001",
-        "kraj": "Polska"
-      }
-    },
-    "pokoj": {
-      "numer": "303",
-      "pietro": 3,
-      "liczbaGosci": 4,
-      "standard": "Family",
-      "udogodnienia": "TV, Wi-Fi, klimatyzacja, łóżeczko",
-      "terminy": [
-        {
-          "od": "2025-01-20",
-          "do": "2025-01-22"
-        }
-      ],
-      "koszt": 400
-    },
-    "termin": {
-      "data_rozpoczecia_pobytu": "2025-01-20",
-      "data_zakonczenia_pobytu": "2025-01-22"
-    }
+  "pokoj" : {
+    "numer" : "101",
+    "pietro" : 1,
+    "liczbaGosci" : 3,
+    "standard" : "Deluxe",
+    "udogodnienia" : "TV, Wi-Fi, klimatyzacja",
+    "terminy" : [ {
+      "data_rozpoczecia_pobytu" : "2025-01-11",
+      "data_zakonczenia_pobytu" : "2025-01-13"
+    } ],
+    "koszt" : 250
   },
-  {
-    "dataRezerwacji": "2025-01-07",
-    "zameldowanie": false,
-    "wymeldowanie": false,
-    "numerRezerwacji": 4,
-    "iloscDoroslych": 1,
-    "iloscDzieci": 0,
-    "platnosc": {
-      "przedplata": 20.0,
-      "koszt": 100.0,
-      "formaPlatnosci": "KARTA",
-      "dataPlatnosci": "2025-01-07",
-      "dataPrzedplaty": "2025-01-07"
+  "termin" : {
+    "data_rozpoczecia_pobytu" : "2025-01-11",
+    "data_zakonczenia_pobytu" : "2025-01-13"
+  },
+  "currentDate" : "2025-01-09"
+}, {
+  "dataRezerwacji" : "2025-01-05",
+  "zameldowanie" : true,
+  "wymeldowanie" : false,
+  "numerRezerwacji" : "2",
+  "iloscDoroslych" : 1,
+  "iloscDzieci" : 0,
+  "platnosc" : {
+    "przedplata" : 30.0,
+    "koszt" : 150.0,
+    "formaPlatnosci" : "GOTOWKA",
+    "dataPlatnosci" : "2025-01-05",
+    "dataPrzedplaty" : "2025-01-05"
+  },
+  "godzinaPrzyjazdu" : "2025-01-15T12:00:00",
+  "gosc" : {
+    "typ" : "prywatny",
+    "imieNazwisko" : "Adam Nowak",
+    "numerTelefonu" : "+48 987 654 321",
+    "adresEmail" : "adam.nowak@example.com",
+    "czyDlaKogos" : false,
+    "specjalneZyczenia" : "Brak",
+    "adresZamieszkania" : {
+      "miejscowosc" : "Kraków",
+      "ulica" : "ul. Różana",
+      "numerDomu" : "10",
+      "numerMieszkania" : 0,
+      "kodPocztowy" : "30-001",
+      "kraj" : "Polska"
     },
-    "godzinaPrzyjazdu": "2025-01-25T10:00:00",
-    "gosc": {
-      "typ": "prywatny",
-      "imieNazwisko": "Zofia Malinowska",
-      "numerTelefonu": "+48 456 789 123",
-      "adresEmail": "zofia.malinowska@example.com",
-      "czyDlaKogos": false,
-      "wspollokatorzy": [],
-      "specjalneZyczenia": "Cisza nocna",
-      "adresZamieszkania": {
-        "miejscowosc": "Gdańsk",
-        "ulica": "ul. Słoneczna",
-        "numerDomu": "18",
-        "numerMieszkania": "2",
-        "kodPocztowy": "80-001",
-        "kraj": "Polska"
-      }
+    "wspollokatorzy" : [ ]
+  },
+  "pokoj" : {
+    "numer" : "202",
+    "pietro" : 2,
+    "liczbaGosci" : 1,
+    "standard" : "Standard",
+    "udogodnienia" : "TV, Wi-Fi",
+    "terminy" : [ {
+      "data_rozpoczecia_pobytu" : "2025-01-15",
+      "data_zakonczenia_pobytu" : "2025-01-16"
+    } ],
+    "koszt" : 150
+  },
+  "termin" : {
+    "data_rozpoczecia_pobytu" : "2025-01-15",
+    "data_zakonczenia_pobytu" : "2025-01-16"
+  },
+  "currentDate" : "2025-01-09"
+}, {
+  "dataRezerwacji" : "2025-01-06",
+  "zameldowanie" : false,
+  "wymeldowanie" : false,
+  "numerRezerwacji" : "3",
+  "iloscDoroslych" : 2,
+  "iloscDzieci" : 2,
+  "platnosc" : {
+    "przedplata" : 100.0,
+    "koszt" : 400.0,
+    "formaPlatnosci" : "KARTA",
+    "dataPlatnosci" : "2025-01-06",
+    "dataPrzedplaty" : "2025-01-06"
+  },
+  "godzinaPrzyjazdu" : "2025-01-20T16:00:00",
+  "gosc" : {
+    "typ" : "prywatny",
+    "imieNazwisko" : "Katarzyna Wiśniewska",
+    "numerTelefonu" : "+48 789 123 456",
+    "adresEmail" : "katarzyna.wisniewska@example.com",
+    "czyDlaKogos" : false,
+    "specjalneZyczenia" : "Łóżeczko dla dziecka",
+    "adresZamieszkania" : {
+      "miejscowosc" : "Poznań",
+      "ulica" : "ul. Zielona",
+      "numerDomu" : "25",
+      "numerMieszkania" : 0,
+      "kodPocztowy" : "60-001",
+      "kraj" : "Polska"
     },
-    "pokoj": {
-      "numer": "404",
-      "pietro": 4,
-      "liczbaGosci": 1,
-      "standard": "Economy",
-      "udogodnienia": "Wi-Fi",
-      "terminy": [
-        {
-          "od": "2025-01-25",
-          "do": "2025-01-26"
-        }
-      ],
-      "koszt": 100
+    "wspollokatorzy" : [ {
+      "typ" : "wspollokator",
+      "imieNazwisko" : "Marek Wiśniewski",
+      "adresEmail" : "marek.wisniewski@example.com",
+      "adresZamieszkania" : null,
+      "numerTelefonu" : null,
+      "czyDlaKogos" : false,
+      "wspollokatorzy" : null,
+      "specjalneZyczenia" : null
+    }, {
+      "typ" : "wspollokator",
+      "imieNazwisko" : "Zuzanna Wiśniewska",
+      "adresEmail" : "brak",
+      "adresZamieszkania" : null,
+      "numerTelefonu" : null,
+      "czyDlaKogos" : false,
+      "wspollokatorzy" : null,
+      "specjalneZyczenia" : null
+    }, {
+      "typ" : "wspollokator",
+      "imieNazwisko" : "Jakub Wiśniewski",
+      "adresEmail" : "brak",
+      "adresZamieszkania" : null,
+      "numerTelefonu" : null,
+      "czyDlaKogos" : false,
+      "wspollokatorzy" : null,
+      "specjalneZyczenia" : null
+    } ]
+  },
+  "pokoj" : {
+    "numer" : "303",
+    "pietro" : 3,
+    "liczbaGosci" : 4,
+    "standard" : "Family",
+    "udogodnienia" : "TV, Wi-Fi, klimatyzacja, łóżeczko",
+    "terminy" : [ {
+      "data_rozpoczecia_pobytu" : "2025-01-20",
+      "data_zakonczenia_pobytu" : "2025-01-22"
+    } ],
+    "koszt" : 400
+  },
+  "termin" : {
+    "data_rozpoczecia_pobytu" : "2025-01-20",
+    "data_zakonczenia_pobytu" : "2025-01-22"
+  },
+  "currentDate" : "2025-01-09"
+}, {
+  "dataRezerwacji" : "2025-01-07",
+  "zameldowanie" : false,
+  "wymeldowanie" : false,
+  "numerRezerwacji" : "4",
+  "iloscDoroslych" : 1,
+  "iloscDzieci" : 0,
+  "platnosc" : {
+    "przedplata" : 20.0,
+    "koszt" : 100.0,
+    "formaPlatnosci" : "KARTA",
+    "dataPlatnosci" : "2025-01-07",
+    "dataPrzedplaty" : "2025-01-07"
+  },
+  "godzinaPrzyjazdu" : "2025-01-25T10:00:00",
+  "gosc" : {
+    "typ" : "prywatny",
+    "imieNazwisko" : "Zofia Malinowska",
+    "numerTelefonu" : "+48 456 789 123",
+    "adresEmail" : "zofia.malinowska@example.com",
+    "czyDlaKogos" : false,
+    "specjalneZyczenia" : "Cisza nocna",
+    "adresZamieszkania" : {
+      "miejscowosc" : "Gdańsk",
+      "ulica" : "ul. Słoneczna",
+      "numerDomu" : "18",
+      "numerMieszkania" : 0,
+      "kodPocztowy" : "80-001",
+      "kraj" : "Polska"
     },
-    "termin": {
-      "data_rozpoczecia_pobytu": "2025-01-25",
-      "data_zakonczenia_pobytu": "2025-01-26"
-    }
-  }
-]
+    "wspollokatorzy" : [ ]
+  },
+  "pokoj" : {
+    "numer" : "404",
+    "pietro" : 4,
+    "liczbaGosci" : 1,
+    "standard" : "Economy",
+    "udogodnienia" : "Wi-Fi",
+    "terminy" : [ {
+      "data_rozpoczecia_pobytu" : "2025-01-25",
+      "data_zakonczenia_pobytu" : "2025-01-26"
+    } ],
+    "koszt" : 100
+  },
+  "termin" : {
+    "data_rozpoczecia_pobytu" : "2025-01-25",
+    "data_zakonczenia_pobytu" : "2025-01-26"
+  },
+  "currentDate" : "2025-01-09"
+} ]

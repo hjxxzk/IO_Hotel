@@ -26,6 +26,7 @@ public class RecepcjonistkaMenuView implements IMenuView {
 
 	Logowanie logowanie = new Logowanie();
 	HotelFasada hotel;
+	//RezerwacjaView rezerwacja = new RezerwacjaView();
 	PokojView pokoje = new PokojView();
 	JList<String> guestList;
 	RezerwacjaView rezerwacja = new RezerwacjaView(hotel);
