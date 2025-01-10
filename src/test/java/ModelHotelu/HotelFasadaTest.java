@@ -3,6 +3,7 @@ package ModelHotelu;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.event.ListDataEvent;
 import java.io.File;
@@ -52,7 +53,19 @@ class HotelFasadaTest {
         assertTrue(rezerwacje.contains(nowaRezerwacja));
     }
 
+    @Test
     void shouldDeleteReservation() {
+        List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
+        String numer_rezerwacji = "1";
+        for (Rezerwacja rezerwacja : rezerwacje) {
+            if (rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji)) {
+                rezerwacje.remove(rezerwacja);
+                break;
+            }
+        }
+        for (Rezerwacja rezerwacja : rezerwacje) {
+            assertFalse(rezerwacja.getNumerRezerwacji().equals(numer_rezerwacji));
+        }
 
     }
 
