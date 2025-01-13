@@ -3,7 +3,11 @@ package ModelHotelu;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.swing.event.ListDataEvent;
 import java.io.File;
@@ -11,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,6 +41,7 @@ class HotelFasadaTest {
     }
 
     @org.junit.jupiter.api.Test
+    @Order(1)
     void makeReservation() {
         List<Pokoj> pokoje = hotel.getPokoje();
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
@@ -54,6 +60,7 @@ class HotelFasadaTest {
     }
 
     @Test
+    @Order(2)
     void shouldDeleteReservation() {
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
         String numer_rezerwacji = "1";
@@ -69,11 +76,34 @@ class HotelFasadaTest {
 
     }
 
-    void shouldReturnAvailableRoomsForSpecificDate() {
-
+    @ParameterizedTest
+    @CsvSource({
+            "1",
+            "2",
+            "3"
+    })
+    @Order(3)
+    void shouldDeleteReservation(String numerRezerwacji) {
+        List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
+        rezerwacje.removeIf(rezerwacja -> rezerwacja.getNumerRezerwacji().equals(numerRezerwacji));
+        for (Rezerwacja rezerwacja : rezerwacje) {
+            assertFalse(rezerwacja.getNumerRezerwacji().equals(numerRezerwacji));
+        }
     }
 
-    void shouldReturnTrueIfTerminIsFree() {
+    @ParameterizedTest
+    @MethodSource("provideReservationNumbers")
+    @Order(4)
+    void shouldCheckInGuests(String numerRezerwacji) {
+        hotel.checkInGuests(numerRezerwacji);
+        for (Rezerwacja rezerwacja : hotel.getRezerwacje()) {
+            if (rezerwacja.getNumerRezerwacji().equals(numerRezerwacji)) {
+                assertTrue(rezerwacja.isZameldowanie(), "Rezerwacja powinna być zameldowana.");
+            }
+        }
+    }
 
+    static Stream<String> provideReservationNumbers() {
+        return Stream.of("1", "2", "3"); // Możesz dodać więcej numerów rezerwacji
     }
 }

@@ -31,17 +31,7 @@ public class Rezerwacja implements IRezerwacja {
 
 	@JsonCreator
 	public Rezerwacja(
-			@JsonProperty("dataRezerwacji") String dataRezerwacji,
-			@JsonProperty("zameldowanie") boolean zameldowanie,
-			@JsonProperty("wymeldowanie") boolean wymeldowanie,
-			@JsonProperty("numerRezerwacji") String numerRezerwacji,
-			@JsonProperty("iloscDoroslych") int iloscDoroslych,
-			@JsonProperty("iloscDzieci") int iloscDzieci,
-			@JsonProperty("platnosc") Platnosc platnosc,
-			@JsonProperty("godzinaPrzyjazdu") String godzinaPrzyjazdu,
-			@JsonProperty("gosc") Gosc gosc,
-			@JsonProperty("pokoj") Pokoj pokoj,
-			@JsonProperty("termin") Termin termin) {
+			@JsonProperty("dataRezerwacji") String dataRezerwacji) {
 		this.dataRezerwacji = dataRezerwacji;
 		this.zameldowanie = zameldowanie;
 		this.wymeldowanie = wymeldowanie;
