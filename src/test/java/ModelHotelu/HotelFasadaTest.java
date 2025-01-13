@@ -42,6 +42,7 @@ class HotelFasadaTest {
 
     @org.junit.jupiter.api.Test
     @Order(1)
+    @Tag("reservation")
     void makeReservation() {
         List<Pokoj> pokoje = hotel.getPokoje();
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
@@ -61,6 +62,7 @@ class HotelFasadaTest {
 
     @Test
     @Order(2)
+    @Tag("reservation")
     void shouldDeleteReservation() {
         try {
             List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
@@ -89,6 +91,7 @@ class HotelFasadaTest {
             "3"
     })
     @Order(3)
+    @Tag("reservation")
     void shouldDeleteReservation(String numerRezerwacji) {
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
         rezerwacje.removeIf(rezerwacja -> rezerwacja.getNumerRezerwacji().equals(numerRezerwacji));
@@ -100,6 +103,7 @@ class HotelFasadaTest {
     @ParameterizedTest
     @MethodSource("provideReservationNumbers")
     @Order(4)
+    @Tag("reservation")
     void shouldCheckInGuests(String numerRezerwacji) {
         hotel.checkInGuests(numerRezerwacji);
         for (Rezerwacja rezerwacja : hotel.getRezerwacje()) {
