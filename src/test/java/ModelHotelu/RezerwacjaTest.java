@@ -38,6 +38,7 @@ class RezerwacjaTest {
 
     @Test
     @Order(1)
+    @Tag("reservation")
     void shouldGenerateReservationNumberWithCurrentDate() {
         Rezerwacja rezerwacja = new Rezerwacja(2, 0, null, "12:40", null, null, null);
         String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 10);
@@ -49,6 +50,7 @@ class RezerwacjaTest {
     @ParameterizedTest
     @MethodSource("dataForCreatingReservations")
     @Order(3)
+    @Tag("reservation")
     void shouldGenerateReservationNumberWithCurrentDateForDifferentReservations(int iloscDoroslych, int iloscDzieci, Platnosc platnosc, String godzinaPrzyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
         Rezerwacja rezerwacja = new Rezerwacja(iloscDoroslych, iloscDzieci, platnosc, godzinaPrzyjazdu, gosc, pokoj, termin);
         String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 10);
@@ -59,6 +61,7 @@ class RezerwacjaTest {
 
     @Test
     @Order(2)
+    @Tag("reservation")
     void shouldCheckInGReservation() {
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
         for (Rezerwacja rezerwacja : rezerwacje) {
