@@ -5,17 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
-
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import mockit.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RezerwacjaTest {
+public class RezerwacjaTest {
     HotelFasada hotel;
     @BeforeEach
     void getData() {
@@ -35,6 +36,22 @@ class RezerwacjaTest {
             e.printStackTrace();
         }
     }
+
+    @Tested
+    private Rezerwacja rezerwacja;
+
+    @Injectable
+    private Platnosc platnosc;
+
+    @Injectable
+    private Gosc gosc;
+
+    @Injectable
+    private Pokoj pokoj;
+
+    @Injectable
+    private Termin termin;
+
 
     @Test
     @Order(1)
@@ -76,5 +93,17 @@ class RezerwacjaTest {
                 Arguments.of(3, 7, null, "10:11", null, null, null),
                 Arguments.of(1, 0, null, "15:52", null, null, null)
         );
+    }
+
+    @Test
+    @Order(4)
+    public void testEditTermin() {
+        Termin termin = new Termin("2023-01-01", "2023-01-10");
+        Rezerwacja rezerwacja = new Rezerwacja(2, 1, null, "15:00", null, null, termin);
+
+        rezerwacja.editTermin("2023-05-01", "2023-05-10");
+
+        assertEquals("2023-05-01", termin.getData_rozpoczecia_pobytu());
+        assertEquals("2023-05-10", termin.getData_zakonczenia_pobytu());
     }
 }

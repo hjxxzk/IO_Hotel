@@ -164,6 +164,7 @@ public class Rezerwacja implements IRezerwacja {
 	public void editTermin(String dataRozpoczecia, String dataZakonczenia) {
 		this.termin.setData_rozpoczecia_pobytu(dataRozpoczecia);
 		this.termin.setData_zakonczenia_pobytu(dataZakonczenia);
+		this.termin.validateDates(dataRozpoczecia, dataZakonczenia);
 	}
 
 }
