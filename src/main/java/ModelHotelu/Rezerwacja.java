@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Random;
 
@@ -60,8 +62,9 @@ public class Rezerwacja implements IRezerwacja {
 	}
 
 	public String getCurrentDate()	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(new Date());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HHmm");
+		LocalDateTime now = LocalDateTime.now();
+		return now.format(formatter);
 	}
 
 	public String getDataRezerwacji() {
