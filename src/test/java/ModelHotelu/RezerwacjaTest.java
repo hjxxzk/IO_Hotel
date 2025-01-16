@@ -70,8 +70,8 @@ public class RezerwacjaTest {
     @Tag("reservation")
     void shouldGenerateReservationNumberWithCurrentDateForDifferentReservations(int iloscDoroslych, int iloscDzieci, Platnosc platnosc, String godzinaPrzyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
         Rezerwacja rezerwacja = new Rezerwacja(iloscDoroslych, iloscDzieci, platnosc, godzinaPrzyjazdu, gosc, pokoj, termin);
-        String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 10);
-        String numerRezerwacji = rezerwacja.getNumerRezerwacji().substring(12, 16);
+        String dataNumeruRezerwacji = rezerwacja.getNumerRezerwacji().substring(0, 15);
+        String numerRezerwacji = rezerwacja.getNumerRezerwacji().substring(16, 21);
         assertEquals(rezerwacja.getCurrentDate(), dataNumeruRezerwacji);
         assertTrue(Integer.parseInt(numerRezerwacji) > 0);
     }

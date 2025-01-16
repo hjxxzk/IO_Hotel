@@ -15,7 +15,9 @@ public class Termin {
 	public Termin(
 			@JsonProperty("od") String data_rozpoczecia_pobytu,
 			@JsonProperty("do") String data_zakonczenia_pobytu) {
-		validateDates(data_rozpoczecia_pobytu, data_zakonczenia_pobytu);
+		if (!(data_rozpoczecia_pobytu == null || data_zakonczenia_pobytu == null)) {
+			validateDates(data_rozpoczecia_pobytu, data_zakonczenia_pobytu);
+		}
 		this.data_rozpoczecia_pobytu = data_rozpoczecia_pobytu;
 		this.data_zakonczenia_pobytu = data_zakonczenia_pobytu;
 	}
