@@ -4,13 +4,13 @@ import InterfejsHotelu.IHotel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HotelFasada implements IHotel {
-
 	private List<Pokoj> pokoje;
-	private List<Rezerwacja> rezerwacje;
+	private List<Rezerwacja> rezerwacje = new ArrayList<>();
 
 	private Pokoj pokojDoZarezerwowania;
 
@@ -50,7 +50,7 @@ public class HotelFasada implements IHotel {
 	 */
 	public void makeReservation(int ilosc_doroslych, int ilosc_dzieci, Platnosc platnosc, String godzina_przyjazdu, Gosc gosc, Pokoj pokoj, Termin termin) {
 		Rezerwacja nowaRezerwacja = new Rezerwacja(ilosc_doroslych, ilosc_dzieci, platnosc, godzina_przyjazdu, gosc, pokoj, termin);
-		if(checkInput(nowaRezerwacja, pokoj))	{
+		if(checkInput(nowaRezerwacja, pokoj) && validateDates(termin.getData_rozpoczecia_pobytu(), termin.getData_zakonczenia_pobytu()))	{
 			rezerwacje.add(nowaRezerwacja);
 			for (Pokoj pokojZListy : pokoje) {
 				if (pokojZListy.equals(pokoj)) {
@@ -178,5 +178,21 @@ public class HotelFasada implements IHotel {
 		}
 		return true;
 	}
+
+	protected boolean validateDates(String dataRozpoczecia, String dataZakonczenia) {
+		try {
+			LocalDate startDate = LocalDate.parse(dataRozpoczecia);
+			LocalDate endDate = LocalDate.parse(dataZakonczenia);
+
+			if (!startDate.isBefore(endDate)) {
+				return false;
+			}
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+
+		return true;
+	}
+
 
 }

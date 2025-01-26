@@ -8,11 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import javax.swing.event.ListDataEvent;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -24,8 +21,12 @@ class HotelFasadaTest {
     @BeforeEach
     void getData() {
         hotel = new HotelFasada();
-        File plikPokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/pokoje.json");
-        File rezerwacjePokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json");
+       // File plikPokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/pokoje.json");
+      //  File rezerwacjePokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json");
+
+        File plikPokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\pokoje.json");
+        File rezerwacjePokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\rezerwacje.json");
+
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -58,6 +59,17 @@ class HotelFasadaTest {
             }
         }
         assertTrue(rezerwacje.contains(nowaRezerwacja));
+    }
+
+    @org.junit.jupiter.api.Test
+    @Order(5)
+    @Tag("reservation")
+    void shouldNotMakeReservation_whenGivenDateIsIncorrect() {
+        List<Pokoj> pokoje = hotel.getPokoje();
+        List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
+        assertThrows(IllegalArgumentException.class, () -> {
+            Termin termin = new Termin("2025-01-23", "2025-01-22");
+        });
     }
 
     @Test
@@ -96,7 +108,7 @@ class HotelFasadaTest {
         List<Rezerwacja> rezerwacje = hotel.getRezerwacje();
         rezerwacje.removeIf(rezerwacja -> rezerwacja.getNumerRezerwacji().equals(numerRezerwacji));
         for (Rezerwacja rezerwacja : rezerwacje) {
-            assertFalse(rezerwacja.getNumerRezerwacji().equals(numerRezerwacji));
+            assertNotEquals(rezerwacja.getNumerRezerwacji(), numerRezerwacji);
         }
     }
 
@@ -114,6 +126,6 @@ class HotelFasadaTest {
     }
 
     static Stream<String> provideReservationNumbers() {
-        return Stream.of("1", "2", "3"); // Możesz dodać więcej numerów rezerwacji
+        return Stream.of("1", "2", "3");
     }
 }

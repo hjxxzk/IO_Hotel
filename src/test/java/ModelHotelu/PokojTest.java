@@ -24,8 +24,8 @@ class PokojTest {
     @BeforeEach
     void getData()  {
         hotel = new HotelFasada();
-        File plikPokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/pokoje.json");
-        File rezerwacjePokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json");
+        File plikPokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\pokoje.json");
+        File rezerwacjePokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\rezerwacje.json");
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -118,6 +118,4 @@ class PokojTest {
                 Arguments.of("103", "2025-03-10", "2025-03-15")
         );
     }
-
-
 }

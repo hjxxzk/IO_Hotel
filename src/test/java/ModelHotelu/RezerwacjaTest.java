@@ -21,8 +21,8 @@ public class RezerwacjaTest {
     @BeforeEach
     void getData() {
         hotel = new HotelFasada();
-        File plikPokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/pokoje.json");
-        File rezerwacjePokojeJSON = new File("/Users/maks_rz/Desktop/Studia/Semestr 5/Inżynieria oprogramowania/HotelProject/src/main/resources/rezerwacje.json");
+        File plikPokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\pokoje.json");
+        File rezerwacjePokojeJSON = new File("C:\\Users\\agnie\\Documents\\Moje_pliki\\Studia\\V_SEM\\Inżynieria_oprogramowania\\IOI_kod\\src\\main\\resources\\rezerwacje.json");
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -64,6 +64,14 @@ public class RezerwacjaTest {
         assertTrue(Integer.parseInt(numerRezerwacji) > 0);
     }
 
+    static Stream<Arguments> dataForCreatingReservations() {
+        return Stream.of(
+                Arguments.of(5, 2, null, "12:34", null, null, null),
+                Arguments.of(3, 7, null, "10:11", null, null, null),
+                Arguments.of(1, 0, null, "15:52", null, null, null)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("dataForCreatingReservations")
     @Order(3)
@@ -87,14 +95,6 @@ public class RezerwacjaTest {
         }
     }
 
-    static Stream<Arguments> dataForCreatingReservations() {
-        return Stream.of(
-                Arguments.of(5, 2, null, "12:34", null, null, null),
-                Arguments.of(3, 7, null, "10:11", null, null, null),
-                Arguments.of(1, 0, null, "15:52", null, null, null)
-        );
-    }
-
     @Test
     @Order(4)
     public void testEditTermin() {
@@ -105,5 +105,30 @@ public class RezerwacjaTest {
 
         assertEquals("2023-05-01", termin.getData_rozpoczecia_pobytu());
         assertEquals("2023-05-10", termin.getData_zakonczenia_pobytu());
+    }
+
+    @Test
+    @Order(5)
+    public void shouldGenerateDifferentReservationNumbers() {
+        Termin termin = new Termin("2023-01-01", "2023-01-10");
+        Rezerwacja rezerwacja = new Rezerwacja(2, 1, null, "15:00", null, null, termin);
+
+        Termin terminDrugiejRezerwacji = new Termin("2023-01-01", "2023-01-10");
+        Rezerwacja drugaRezerwacja = new Rezerwacja(2, 1, null, "15:00", null, null, termin);
+
+        assertNotEquals(rezerwacja.getNumerRezerwacji(), drugaRezerwacja.getNumerRezerwacji());
+
+        try {
+            Thread.sleep(5000);
+
+            Termin terminTrzeciejRezerwacji = new Termin("2023-01-01", "2023-01-10");
+            Rezerwacja trzeciaRezerwacja = new Rezerwacja(2, 1, null, "15:00", null, null, termin);
+
+            assertNotEquals(rezerwacja.getNumerRezerwacji(), trzeciaRezerwacja.getNumerRezerwacji());
+            assertNotEquals(drugaRezerwacja.getNumerRezerwacji(), trzeciaRezerwacja.getNumerRezerwacji());
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
